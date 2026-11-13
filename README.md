@@ -2,16 +2,14 @@
 
 # Happy Birthday
 
-Mobile birthday scroll: Cleopatra / Nile / moon. Built with [landing-page-design](https://github.com/elayadesign/ai-design-skills).
+Mobile birthday scroll: Cleopatra / Nile / moon. Styled with [landing-page-design](https://github.com/elayadesign/ai-design-skills).
 
-## Share
+## Live
 
-```
 https://metourni.github.io/bdtest/?name=Sofia
-```
 
 Optional: `&age=25` · `&message=Your%20note`
 
-## Design notes
+## Design
 
-Layout **C** (minimal conversion): one audience, one action (open the scroll). Manrope, flat dark surfaces, type scale, tagline word reveal.
+Layout **C** (one action: open the scroll). Manrope, flat dark surfaces, type scale, tagline word reveal. Name comes from the `name` query param.

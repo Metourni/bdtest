@@ -2,7 +2,7 @@
 
 # Happy Birthday
 
-Mobile birthday scroll: Cleopatra / Nile / moon. Styled with [landing-page-design](https://github.com/elayadesign/ai-design-skills).
+3D Egyptian scroll experience (Three.js): pyramids, Nile, moon, gold relics. Name from query param.
 
 ## Live
 
@@ -10,6 +10,4 @@ https://metourni.github.io/bdtest/?name=Sofia
 
 Optional: `&age=25` · `&message=Your%20note`
 
-## Design
-
-Layout **C** (one action: open the scroll). Manrope, flat dark surfaces, type scale, tagline word reveal. Name comes from the `name` query param.
+Scroll to move the camera through the desert court.

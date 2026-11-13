@@ -3,900 +3,626 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#05070d" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="robots" content="noindex" />
-  <meta name="description" content="A private birthday scroll for her, Nile moon, Cleopatra energy." />
-  <meta property="og:title" content="Happy Birthday" />
-  <meta property="og:description" content="A private birthday scroll for her, Nile moon, Cleopatra energy." />
+  <meta name="description" content="A 3D Egyptian birthday scroll under the Nile moon." />
   <title>Happy Birthday</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
   <style>
 :root {
-  --bg: #000000;
-  --surface: #181818;
-  --surface-2: #1f1f1f;
-  --surface-3: #272727;
-  --ink: #ffffff;
-  --ink-muted: #9b9b9b;
-  --gold: #d4af37;
-  --gold-soft: #e8d5a3;
+  --ink: #f6efdf;
+  --muted: rgba(246, 239, 223, 0.62);
+  --gold: #e0b84c;
+  --gold-dim: #a8872e;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --font: "Manrope", sans-serif;
-  --space-50: 4px;
-  --space-75: 8px;
-  --space-100: 12px;
-  --space-200: 16px;
-  --space-300: 24px;
-  --space-400: 32px;
-  --space-500: 40px;
-  --space-600: 48px;
-  --space-700: 64px;
-  --space-800: 80px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
-  --radius-2xl: 16px;
-  --pad: 16px;
+  --pad: clamp(1.1rem, 4.5vw, 2rem);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
-
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  min-height: var(--app-h, 720px);
-  background: var(--bg);
+  background: #05070d;
   color: var(--ink);
-  font-family: var(--font);
-  font-weight: 500;
-  line-height: 24px;
+  font-family: "Cormorant Garamond", Georgia, serif;
   overflow-x: hidden;
 }
 
-img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
+#world {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+  touch-action: none;
+  pointer-events: none;
+}
 
-.skip {
-  position: absolute;
-  left: -9999px;
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 40%, transparent 40%, rgba(5, 7, 13, 0.55) 100%),
+    linear-gradient(180deg, rgba(5, 7, 13, 0.35), transparent 18%, transparent 72%, rgba(5, 7, 13, 0.85));
+}
+
+.scroll-track {
+  position: relative;
+  z-index: 2;
+  height: 520vh;
+}
+
+.hud {
+  position: sticky;
   top: 0;
-  background: var(--gold);
-  color: #000;
-  padding: var(--space-75) var(--space-100);
-  z-index: 100;
+  height: 100dvh;
+  height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: calc(env(safe-area-inset-top) + 1.2rem) var(--pad) 1.5rem;
+  pointer-events: none;
 }
-.skip:focus { left: var(--space-200); top: var(--space-200); }
 
-/* Text styles */
-.heading-1 {
-  font-size: 60px;
-  line-height: 60px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-  margin: 0;
+.panel {
+  width: min(100%, 34rem);
+  text-align: center;
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  opacity: 0;
+  transform: translate3d(0, 40px, -120px) rotateX(12deg);
+  transition: opacity 0.7s var(--ease), transform 0.9s var(--ease);
+  pointer-events: auto;
 }
-.heading-2 {
-  font-size: 48px;
-  line-height: 48px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-  margin: 0;
+
+.panel.is-on {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotateX(0deg);
 }
-.heading-3 {
-  font-size: 36px;
-  line-height: 40px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
-  margin: 0;
+
+.panel.is-out {
+  opacity: 0;
+  transform: translate3d(0, -28px, 80px) rotateX(-8deg);
 }
-.heading-5 {
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 600;
-  text-wrap: balance;
-  margin: 0;
-}
-.title-4 {
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 500;
-  margin: 0;
-}
-.title-5 {
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+
+.kicker {
+  margin: 0 0 0.7rem;
+  font-family: "Cinzel", serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
-  margin: 0;
   color: var(--gold);
 }
-.body-2 {
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  text-wrap: pretty;
+
+h1, h2 {
   margin: 0;
-}
-.body-3 {
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  text-wrap: pretty;
-  margin: 0;
-  color: var(--ink-muted);
-}
-.caption-4 {
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 500;
-  color: var(--ink-muted);
-  margin: 0;
-}
-.button-md {
-  font-size: 16px;
-  line-height: 24px;
+  font-family: "Cinzel", serif;
   font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-wrap: balance;
 }
 
-.hero-heading {
-  max-width: 680px;
-  background: linear-gradient(90deg, #ffffff 0%, #9b9b9b 100%);
+h1 {
+  font-size: clamp(2.6rem, 11vw, 4.4rem);
+  background: linear-gradient(180deg, #fff6df, #e0b84c 55%, #8f6a1d);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.45));
 }
 
-.hero-sub {
-  max-width: 680px;
+h2 {
+  font-size: clamp(1.7rem, 6.5vw, 2.5rem);
+  color: var(--ink);
+}
+
+.lead {
+  margin: 0.9rem auto 0;
+  max-width: 28ch;
+  font-size: clamp(1.2rem, 4.2vw, 1.55rem);
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.note {
+  margin: 1rem auto 0;
+  max-width: 32ch;
+  font-size: clamp(1.25rem, 4.4vw, 1.6rem);
+  line-height: 1.5;
+  color: var(--ink);
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-75);
-  padding: var(--space-75) var(--space-100);
-  min-height: 40px;
-  border: 0;
-  border-radius: var(--radius-lg);
-  background: var(--gold);
-  color: #000000;
-  font-family: var(--font);
+  margin-top: 1.25rem;
+  min-height: 3rem;
+  padding: 0.8rem 1.35rem;
+  border: 1px solid var(--gold);
+  background: linear-gradient(180deg, #efd07a, #c9962a);
+  color: #1a1204;
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
-  transition: transform 500ms var(--ease), background-color 300ms var(--ease), opacity 300ms var(--ease);
+  pointer-events: auto;
+  transition: transform 0.35s var(--ease), filter 0.3s ease;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
 }
-.btn:hover { background: var(--gold-soft); }
-.btn:active { transform: scale(0.98); }
-.btn:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
-}
+.btn:active { transform: scale(0.97); }
 .btn--ghost {
   background: transparent;
-  color: var(--gold-soft);
-  border: 1px solid rgba(212, 175, 55, 0.45);
-  width: min(100%, 280px);
-}
-.btn--ghost:hover { background: var(--surface-2); }
-
-.moon-field {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-.moon-field .drift {
-  position: absolute;
-  width: var(--s, 10px);
-  height: var(--s, 10px);
-  border-radius: 999px;
-  background: var(--gold-soft);
-  opacity: 0.28;
-  box-shadow: 4px 0 0 -1px var(--bg);
-  animation: drift var(--dur, 14s) linear infinite;
-  animation-delay: var(--delay, 0s);
-}
-@keyframes drift {
-  from { transform: translate3d(0, calc(var(--app-h, 720px) + 40px), 0) rotate(0deg); }
-  to { transform: translate3d(var(--x, 20px), -80px, 0) rotate(360deg); }
-}
-
-.page > * { position: relative; z-index: 1; }
-
-.shell {
-  width: min(100%, 720px);
-  margin: 0 auto;
-  padding-inline: var(--pad);
-}
-
-.hero {
-  min-height: var(--app-h, 720px);
-  display: flex;
-  flex-direction: column;
-  padding-top: calc(env(safe-area-inset-top) + var(--space-400));
-  padding-bottom: var(--space-400);
-  gap: var(--space-300);
-}
-
-.hero-copy {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-200);
-  animation: rise 500ms var(--ease) both;
-}
-
-.hero-cta-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-200);
-  padding-top: var(--space-100);
-}
-
-.proof-line {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-75);
-  color: var(--ink-muted);
-}
-.proof-line svg { width: 16px; height: 16px; color: var(--gold); flex-shrink: 0; }
-
-.hero-stage {
-  position: relative;
-  margin-top: auto;
-  margin-inline: calc(var(--pad) * -1);
-  min-height: 360px;
-  background: var(--surface);
-  overflow: hidden;
-  animation: fadeIn 500ms var(--ease) 0.08s both;
-}
-
-.hero-water {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 55%;
-  opacity: 0.45;
-}
-
-.hero-portrait-wrap {
-  position: absolute;
-  inset: var(--space-400) var(--space-300) var(--space-500);
-  border-radius: var(--radius-2xl);
-  overflow: hidden;
-  background: var(--surface-2);
-  border: 1px solid rgba(212, 175, 55, 0.35);
-}
-
-.hero-portrait-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 18%;
-}
-
-.hero-moon {
-  position: absolute;
-  top: var(--space-300);
-  right: var(--space-200);
-  width: 72px;
-  height: 72px;
-  border-radius: 999px;
-  object-fit: cover;
-  z-index: 2;
-  box-shadow: 0 0 0 4px rgba(0,0,0,0.35);
-  animation: floatMoon 7000ms var(--ease) infinite;
-}
-
-.hero-crescent {
-  position: absolute;
-  left: var(--space-300);
-  bottom: var(--space-600);
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  background: var(--gold-soft);
-  z-index: 2;
-  animation: floatMoon 9000ms var(--ease) 1000ms infinite reverse;
-}
-.hero-crescent::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 999px;
-  background: var(--surface);
-  transform: translate(24%, -8%) scale(0.92);
-}
-
-.ankh {
-  position: absolute;
-  left: var(--space-300);
-  top: var(--space-300);
-  z-index: 2;
-  width: 20px;
-  height: 32px;
   color: var(--gold);
-  opacity: 0.85;
 }
 
-@keyframes floatMoon {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-@keyframes rise {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.section {
-  padding: var(--space-700) 0;
-}
-
-.section-inner {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-300);
-}
-
-.section--surface { background: var(--surface); }
-
-.letter-body {
-  max-width: 36ch;
-  font-size: 20px;
-  line-height: 28px;
-  font-weight: 500;
-  text-wrap: pretty;
-}
-
-.water-band {
-  position: relative;
-  background: var(--surface-2);
-  overflow: hidden;
-}
-.water-band img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  object-position: center 60%;
-  opacity: 0.85;
-}
-.water-band .caption-4 {
-  position: absolute;
-  left: var(--pad);
-  bottom: var(--space-200);
-  color: var(--gold-soft);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.realm-grid {
+.wish {
   display: grid;
-  gap: var(--space-200);
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+  text-align: left;
 }
-.realm-shot {
-  position: relative;
-  border-radius: var(--radius-2xl);
-  overflow: hidden;
-  background: var(--surface-2);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  min-height: 220px;
+.wish span {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  padding: 0.85rem 1rem;
+  background: rgba(10, 14, 24, 0.45);
+  border: 1px solid rgba(224, 184, 76, 0.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 1.05rem;
+  transform: translateZ(0);
 }
-.realm-shot img {
-  width: 100%;
-  height: 100%;
-  min-height: 220px;
-  object-fit: cover;
+.wish i {
+  width: 0.85rem;
+  height: 0.85rem;
+  margin-top: 0.3rem;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: inset -0.3rem 0 0 0 #0a0e18;
 }
-.realm-shot figcaption {
-  position: absolute;
+
+.progress {
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: var(--space-200);
-  background: rgba(0, 0, 0, 0.55);
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gold-soft);
+  height: 3px;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.08);
 }
-.realm-shot--tall { min-height: 280px; }
-.realm-shot--tall img { min-height: 280px; }
-
-.wish-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-200);
-}
-.wish-list li {
-  display: grid;
-  grid-template-columns: 24px 1fr;
-  gap: var(--space-200);
-  align-items: start;
-  padding: var(--space-200);
-  background: var(--surface-2);
-  border: 1px solid rgba(212, 175, 55, 0.18);
-  border-radius: var(--radius-xl);
-}
-.wish-list li svg {
-  width: 20px;
-  height: 20px;
-  margin-top: 2px;
-  color: var(--gold);
-}
-
-.tagline {
-  padding: var(--space-800) 0;
-  background: var(--bg);
-}
-.tagline-line {
-  max-width: 680px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35em;
-}
-.tagline-line .word {
-  color: rgba(255, 255, 255, 0.28);
-  transition: color 500ms var(--ease);
-}
-.tagline-line .word.is-on {
-  color: var(--ink);
-}
-
-.finale {
-  text-align: center;
-  padding: var(--space-700) 0 var(--space-800);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-300);
-  background: var(--surface);
-}
-.finale-frame {
-  width: min(100%, 240px);
-  aspect-ratio: 3 / 4;
-  border-radius: var(--radius-2xl);
-  overflow: hidden;
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  background: var(--surface-2);
-}
-.finale-frame img {
-  width: 100%;
+.progress > i {
+  display: block;
   height: 100%;
-  object-fit: cover;
-  object-position: center 15%;
-}
-.finale-copy {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-100);
-  max-width: 680px;
+  width: 0%;
+  background: linear-gradient(90deg, #8f6a1d, #e0b84c, #fff1c2);
 }
 
-.site-foot {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-200);
-  padding: var(--space-300) var(--pad) calc(var(--space-300) + env(safe-area-inset-bottom));
-  background: var(--bg);
-  border: 1px solid var(--surface-3);
-  border-left: 0;
-  border-right: 0;
-  border-bottom: 0;
-}
-.site-foot a:hover { color: var(--gold-soft); }
-.site-foot a:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
-}
-
-.spark-canvas {
+.hint {
   position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  left: 50%;
+  bottom: calc(1.1rem + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 4;
+  font-family: "Cinzel", serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.9;
+  animation: bob 2.4s var(--ease) infinite;
   pointer-events: none;
-  z-index: 20;
 }
+.hint.is-hide { opacity: 0; transition: opacity 0.5s ease; }
 
-.reveal:not(.is-in) {
-  opacity: 0;
-  transform: translateY(32px);
-}
-.reveal {
-  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
-}
-.reveal.is-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (min-width: 720px) {
-  :root { --pad: 24px; }
-  .hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: var(--space-400);
-    align-items: center;
-  }
-  .hero-stage {
-    margin: 0;
-    min-height: calc(var(--app-h, 720px) - 80px);
-    border-radius: var(--radius-2xl);
-    height: 100%;
-  }
-  .realm-grid {
-    grid-template-columns: 1.1fr 0.9fr;
-  }
-  .heading-1 { font-size: 60px; line-height: 60px; }
-}
-
-@media (max-width: 430px) {
-  .heading-1 {
-    font-size: 48px;
-    line-height: 48px;
-  }
-  .heading-2 {
-    font-size: 36px;
-    line-height: 40px;
-  }
-  .heading-3 {
-    font-size: 30px;
-    line-height: 36px;
-  }
+@keyframes bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-6px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .reveal { opacity: 1; transform: none; }
-  .tagline-line .word { color: var(--ink); }
+  .panel { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hint { animation: none; }
 }
   </style>
 </head>
 <body>
-  <a class="skip" href="#letter">Skip to note</a>
+  <canvas id="world" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
 
   <script>
     window.BIRTHDAY = {
       name: "Love",
       age: null,
       message:
-        "Under Khonsu moon and along the Nile, the queenship is yours. Soft power, golden will, and a year that answers to your name.",
+        "Under Khonsu moon the Nile answers your name. Soft power, golden will, Cleopatra of this night.",
     };
   </script>
 
-  <div class="moon-field" aria-hidden="true" id="moonField"></div>
+  <div class="scroll-track" id="track">
+    <div class="hud">
+      <section class="panel is-on" data-panel="0">
+        <p class="kicker" id="heroMark">For you</p>
+        <h1>Happy<br />Birthday</h1>
+        <p class="lead" id="heroSub"></p>
+        <a class="btn" href="#story">Enter the Nile court</a>
+      </section>
+    </div>
 
-  <div class="page">
-    <header class="hero shell">
-      <div class="hero-copy">
-        <p class="title-5" id="heroMark">For you</p>
-        <h1 class="heading-1 hero-heading">
-          Happy<br />Birthday
-        </h1>
-        <p class="body-3 hero-sub" id="heroSub"></p>
-        <div class="hero-cta-row">
-          <a class="btn button-md" href="#letter">Open your scroll</a>
-          <p class="caption-4 proof-line">Nile court, moon of Khonsu</p>
-        </div>
-      </div>
+    <div class="hud" id="story">
+      <section class="panel" data-panel="1">
+        <p class="kicker">From the Nile court</p>
+        <h2 id="letterTitle">To you,</h2>
+        <p class="note" id="letterBody"></p>
+      </section>
+    </div>
 
-      <div class="hero-stage" aria-hidden="true">
-        <img class="hero-water" src="assets/water-night.jpg" alt="" width="1400" height="931" />
-        <svg class="ankh" viewBox="0 0 24 40" fill="currentColor" aria-hidden="true">
-          <path d="M12 0c-3.3 0-6 2.7-6 6 0 2.4 1.4 4.4 3.4 5.4H4v4h6v24h4V15.4h6v-4h-5.4C16.6 10.4 18 8.4 18 6c0-3.3-2.7-6-6-6zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
-        </svg>
-        <img class="hero-moon" src="assets/moon.jpg" alt="" width="120" height="120" />
-        <div class="hero-crescent"></div>
-        <div class="hero-portrait-wrap">
-          <img src="assets/portrait.jpg" alt="Birthday portrait styled as Cleopatra of the night" width="800" height="1200" />
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <section class="section" id="letter">
-        <div class="shell section-inner reveal is-in">
-          <p class="title-5">From the Nile court</p>
-          <h2 class="heading-5" id="letterTitle">To you,</h2>
-          <p class="letter-body" id="letterBody"></p>
-          <p class="caption-4">With love, always</p>
+    <div class="hud">
+      <section class="panel" data-panel="2">
+        <p class="kicker">Three blessings</p>
+        <h2>May the moon grant</h2>
+        <div class="wish">
+          <span><i></i>Nile mornings that feel like destiny</span>
+          <span><i></i>Gold that fits your name, not a costume</span>
+          <span><i></i>A court of people who match your tide</span>
         </div>
       </section>
+    </div>
 
-      <div class="water-band" aria-hidden="true">
-        <img src="assets/water.jpg" alt="" width="1400" height="1050" />
-        <p class="caption-4">Waters of the Nile</p>
-      </div>
-
-      <section class="section section--surface" id="realm">
-        <div class="shell section-inner reveal is-in">
-          <p class="title-5">Her realm</p>
-          <h2 class="heading-5">Cleopatra of this day</h2>
-          <p class="body-3">Stone, sky, and water for the girl who gets the crown tonight.</p>
-          <div class="realm-grid">
-            <figure class="realm-shot realm-shot--tall">
-              <img src="assets/nile.jpg" alt="Sphinx and pyramid at Giza" width="1400" height="2154" loading="lazy" />
-              <figcaption>Stone that remembers queens</figcaption>
-            </figure>
-            <figure class="realm-shot">
-              <img src="assets/egypt-night.jpg" alt="Great Pyramid under open sky" width="1400" height="933" loading="lazy" />
-              <figcaption>Pyramid light</figcaption>
-            </figure>
-            <figure class="realm-shot">
-              <img src="assets/water-night.jpg" alt="Open water under sky" width="1400" height="931" loading="lazy" />
-              <figcaption>By the water edge</figcaption>
-            </figure>
-          </div>
-        </div>
+    <div class="hud">
+      <section class="panel" data-panel="3">
+        <p class="kicker">Crescent of Isis</p>
+        <h2 id="finaleTitle">Queen of your own Nile</h2>
+        <p class="lead">Keep scrolling. The pyramids turn for you.</p>
+        <button type="button" class="btn btn--ghost" id="sparkBtn">Awaken the moons</button>
       </section>
-
-      <section class="section" id="wishes">
-        <div class="shell section-inner reveal is-in">
-          <p class="title-5">Three blessings</p>
-          <h2 class="heading-5">May the moon grant</h2>
-          <ul class="wish-list">
-            <li>
-              <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88ZM184,32h-8V24a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V48h8a8,8,0,0,0,0-16ZM223.53,154.06a80,80,0,0,1-97.47,97.47A80,80,0,1,1,223.53,154.06ZM208,144a64.07,64.07,0,0,0-64-64,64.07,64.07,0,0,0-55.3,95.68A80.08,80.08,0,0,0,175.68,208.3,64.07,64.07,0,0,0,208,144Z"/></svg>
-              <span class="body-2">Nile mornings that feel like destiny</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88ZM184,32h-8V24a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V48h8a8,8,0,0,0,0-16ZM223.53,154.06a80,80,0,0,1-97.47,97.47A80,80,0,1,1,223.53,154.06ZM208,144a64.07,64.07,0,0,0-64-64,64.07,64.07,0,0,0-55.3,95.68A80.08,80.08,0,0,0,175.68,208.3,64.07,64.07,0,0,0,208,144Z"/></svg>
-              <span class="body-2">Gold that fits your name, not a costume</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88ZM184,32h-8V24a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V48h8a8,8,0,0,0,0-16ZM223.53,154.06a80,80,0,0,1-97.47,97.47A80,80,0,1,1,223.53,154.06ZM208,144a64.07,64.07,0,0,0-64-64,64.07,64.07,0,0,0-55.3,95.68A80.08,80.08,0,0,0,175.68,208.3,64.07,64.07,0,0,0,208,144Z"/></svg>
-              <span class="body-2">A court of people who match your tide</span>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="tagline" id="tagline" aria-label="Tagline">
-        <div class="shell">
-          <p class="heading-3 tagline-line" id="taglineLine"></p>
-        </div>
-      </section>
-
-      <section class="finale reveal is-in" id="finale">
-        <div class="finale-frame">
-          <img src="assets/portrait.jpg" alt="Portrait close up for the birthday finale" width="800" height="1200" loading="lazy" />
-        </div>
-        <div class="finale-copy">
-          <p class="title-5">Crescent of Isis</p>
-          <h2 class="heading-5" id="finaleTitle">Queen of your own Nile</h2>
-          <p class="body-3">Tap once. Let the moons rise for you.</p>
-        </div>
-        <button type="button" class="btn btn--ghost button-md" id="sparkBtn">Tap for moons</button>
-      </section>
-    </main>
-
-    <footer class="site-foot">
-      <span class="caption-4">Made for your day</span>
-      <a class="caption-4" href="#letter">Back to note</a>
-    </footer>
+    </div>
   </div>
 
-  <canvas id="sparkCanvas" class="spark-canvas" aria-hidden="true"></canvas>
+  <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+  <p class="hint" id="hint">Scroll to rise</p>
 
-  <script>
-(function () {
-  function setAppH() {
-    document.documentElement.style.setProperty("--app-h", window.innerHeight + "px");
-  }
-  setAppH();
-  window.addEventListener("resize", setAppH, { passive: true });
-
-  const defaults = window.BIRTHDAY || { name: "Love", message: "" };
-  const params = new URLSearchParams(window.location.search);
-  const nameParam = (params.get("name") || "").trim();
-  const ageParam = (params.get("age") || "").trim();
-  const messageParam = (params.get("message") || "").trim();
-  const name = nameParam || (defaults.name || "Love").trim() || "Love";
-  const age = ageParam
-    ? ageParam
-    : defaults.age != null && defaults.age !== ""
-      ? String(defaults.age)
-      : "";
-  const message =
-    messageParam ||
-    defaults.message ||
-    "Under Khonsu moon and along the Nile, the queenship is yours.";
-
-  document.title = "Happy Birthday, " + name;
-
-  const mark = document.getElementById("heroMark");
-  const sub = document.getElementById("heroSub");
-  const letterTitle = document.getElementById("letterTitle");
-  const letterBody = document.getElementById("letterBody");
-  const finaleTitle = document.getElementById("finaleTitle");
-
-  if (mark) mark.textContent = "For " + name;
-  if (sub) {
-    sub.textContent = age
-      ? name + ", Cleopatra of " + age + ". One scroll, one night, all yours."
-      : name + ", Cleopatra of tonight. One scroll, one night, all yours.";
-  }
-  if (letterTitle) letterTitle.textContent = "To " + name + ",";
-  if (letterBody) letterBody.textContent = message;
-  if (finaleTitle) finaleTitle.textContent = name + ", queen of your own Nile";
-
-  // Tagline reveal (B11)
-  const taglineText = "Queenship looks like you tonight under this moon";
-  const taglineEl = document.getElementById("taglineLine");
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (taglineEl) {
-    const words = taglineText.split(" ");
-    taglineEl.innerHTML = words
-      .map(function (w) {
-        return '<span class="word">' + w + "</span>";
-      })
-      .join(" ");
-    const wordNodes = Array.prototype.slice.call(taglineEl.querySelectorAll(".word"));
-    if (reduce) {
-      wordNodes.forEach(function (n) { n.classList.add("is-on"); });
-    } else {
-      const io = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            wordNodes.forEach(function (node, i) {
-              window.setTimeout(function () {
-                node.classList.add("is-on");
-              }, Math.min(i * 70, 400));
-            });
-            io.disconnect();
-          });
-        },
-        { threshold: 0.35 }
-      );
-      io.observe(taglineEl);
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
     }
   }
+  </script>
+  <script type="module">
+import * as THREE from "three";
 
-  const field = document.getElementById("moonField");
-  if (field && !reduce) {
-    const count = Math.min(12, Math.max(6, Math.floor(window.innerWidth / 70)));
-    for (let i = 0; i < count; i++) {
-      const el = document.createElement("span");
-      el.className = "drift";
-      const size = 6 + Math.random() * 12;
-      el.style.setProperty("--s", size + "px");
-      el.style.setProperty("--dur", 12 + Math.random() * 16 + "s");
-      el.style.setProperty("--delay", -Math.random() * 18 + "s");
-      el.style.setProperty("--x", Math.random() * 80 - 40 + "px");
-      el.style.left = Math.random() * 100 + "%";
-      el.style.opacity = String(0.12 + Math.random() * 0.28);
-      field.appendChild(el);
-    }
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const params = new URLSearchParams(location.search);
+const defaults = window.BIRTHDAY || {};
+const name = (params.get("name") || defaults.name || "Love").trim() || "Love";
+const age = (params.get("age") || (defaults.age != null ? String(defaults.age) : "")).trim();
+const message =
+  (params.get("message") || "").trim() ||
+  defaults.message ||
+  "Under Khonsu moon the Nile answers your name.";
+
+document.title = "Happy Birthday, " + name;
+document.getElementById("heroMark").textContent = "For " + name;
+document.getElementById("heroSub").textContent = age
+  ? name + " · Cleopatra of " + age
+  : name + " · Cleopatra of tonight";
+document.getElementById("letterTitle").textContent = "To " + name + ",";
+document.getElementById("letterBody").textContent = message;
+document.getElementById("finaleTitle").textContent = name + ", queen of your own Nile";
+
+const canvas = document.getElementById("world");
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: !reduce,
+  alpha: false,
+  powerPreference: "high-performance",
+});
+renderer.setPixelRatio(Math.min(devicePixelRatio, reduce ? 1 : 1.75));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x05070d);
+scene.fog = new THREE.FogExp2(0x05070d, 0.018);
+
+const camera = new THREE.PerspectiveCamera(48, innerWidth / innerHeight, 0.1, 400);
+camera.position.set(0, 8, 28);
+
+const hemi = new THREE.HemisphereLight(0x9eb7ff, 0x3a2710, 0.55);
+scene.add(hemi);
+const sun = new THREE.DirectionalLight(0xffd59a, 1.35);
+sun.position.set(-18, 26, 10);
+scene.add(sun);
+const goldGlow = new THREE.PointLight(0xe0b84c, 1.4, 60, 2);
+goldGlow.position.set(0, 10, 4);
+scene.add(goldGlow);
+
+// Stars
+{
+  const count = reduce ? 400 : 1200;
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    const r = 80 + Math.random() * 120;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+    pos[i * 3 + 1] = Math.abs(r * Math.cos(phi)) + 10;
+    pos[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta);
   }
-
-  const blocks = document.querySelectorAll(".reveal");
-  if (!reduce && "IntersectionObserver" in window) {
-    blocks.forEach(function (el) {
-      const r = el.getBoundingClientRect();
-      if (r.top > (window.innerHeight || 800) * 0.92) el.classList.remove("is-in");
-    });
-    const io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-in");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px 15% 0px" }
-    );
-    blocks.forEach(function (el) {
-      if (!el.classList.contains("is-in")) io.observe(el);
-    });
-  }
-
-  const canvas = document.getElementById("sparkCanvas");
-  const btn = document.getElementById("sparkBtn");
-  if (!canvas || !btn) return;
-  const ctx = canvas.getContext("2d");
-  let particles = [];
-  let raf = 0;
-
-  function resize() {
-    canvas.width = window.innerWidth * devicePixelRatio;
-    canvas.height = window.innerHeight * devicePixelRatio;
-    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-  }
-  resize();
-  window.addEventListener("resize", resize, { passive: true });
-
-  function spawn(x, y) {
-    for (let i = 0; i < 28; i++) {
-      const angle = (Math.PI * 2 * i) / 28 + Math.random() * 0.4;
-      const speed = 2 + Math.random() * 5;
-      particles.push({
-        x: x,
-        y: y,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed - 1.5,
-        life: 1,
-        size: 3 + Math.random() * 6,
-        spin: Math.random() * Math.PI,
-      });
-    }
-    if (!raf) raf = requestAnimationFrame(tick);
-  }
-
-  function drawCrescent(p) {
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.spin + (1 - p.life) * 2);
-    ctx.globalAlpha = Math.max(0, p.life);
-    ctx.fillStyle = "#e8d5a3";
-    ctx.beginPath();
-    ctx.arc(0, 0, p.size, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.beginPath();
-    ctx.arc(p.size * 0.45, 0, p.size * 0.85, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-    ctx.globalCompositeOperation = "source-over";
-  }
-
-  function tick() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles = particles.filter(function (p) { return p.life > 0.02; });
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vy += 0.06;
-      p.vx *= 0.99;
-      p.life -= 0.016;
-      drawCrescent(p);
-    }
-    if (particles.length) raf = requestAnimationFrame(tick);
-    else {
-      raf = 0;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-  }
-
-  btn.addEventListener("click", function () {
-    const rect = btn.getBoundingClientRect();
-    spawn(rect.left + rect.width / 2, rect.top + rect.height / 2);
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  const mat = new THREE.PointsMaterial({
+    color: 0xfff2c8,
+    size: 0.35,
+    sizeAttenuation: true,
+    transparent: true,
+    opacity: 0.85,
   });
-})();
+  scene.add(new THREE.Points(geo, mat));
+}
+
+function pyramidMesh(size, color) {
+  const geo = new THREE.ConeGeometry(size, size * 1.15, 4, 1, false);
+  geo.rotateY(Math.PI / 4);
+  const mat = new THREE.MeshStandardMaterial({
+    color,
+    roughness: 0.82,
+    metalness: 0.08,
+    flatShading: true,
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.castShadow = false;
+  return mesh;
+}
+
+const desert = new THREE.Group();
+scene.add(desert);
+
+const sand = new THREE.Mesh(
+  new THREE.CircleGeometry(160, 64),
+  new THREE.MeshStandardMaterial({ color: 0x8a6a3a, roughness: 1, metalness: 0.05 })
+);
+sand.rotation.x = -Math.PI / 2;
+sand.position.y = 0;
+desert.add(sand);
+
+const duneMat = new THREE.MeshStandardMaterial({
+  color: 0x9b7540,
+  roughness: 1,
+  flatShading: true,
+});
+for (let i = 0; i < 10; i++) {
+  const d = new THREE.Mesh(new THREE.SphereGeometry(8 + Math.random() * 10, 8, 6, 0, Math.PI * 2, 0, Math.PI / 2), duneMat);
+  d.position.set((Math.random() - 0.5) * 90, -1.5, -20 - Math.random() * 70);
+  d.scale.set(1.6, 0.35 + Math.random() * 0.25, 1.2);
+  desert.add(d);
+}
+
+const p1 = pyramidMesh(10, 0xc9a35b);
+p1.position.set(0, 5.75, -8);
+const p2 = pyramidMesh(6.2, 0xb8924a);
+p2.position.set(-14, 3.55, -18);
+const p3 = pyramidMesh(4.8, 0xa87f3c);
+p3.position.set(13, 2.75, -22);
+desert.add(p1, p2, p3);
+
+// Moon
+const moonTex = new THREE.TextureLoader().load("assets/moon.jpg");
+moonTex.colorSpace = THREE.SRGBColorSpace;
+const moon = new THREE.Mesh(
+  new THREE.SphereGeometry(3.2, 48, 48),
+  new THREE.MeshStandardMaterial({
+    map: moonTex,
+    emissive: 0x665533,
+    emissiveIntensity: 0.35,
+    roughness: 1,
+    metalness: 0,
+  })
+);
+moon.position.set(12, 22, -30);
+scene.add(moon);
+const moonLight = new THREE.PointLight(0xfff0c8, 1.8, 80);
+moon.add(moonLight);
+
+// Nile ribbon
+const nileCurve = new THREE.CatmullRomCurve3([
+  new THREE.Vector3(-40, 0.15, 25),
+  new THREE.Vector3(-10, 0.15, 12),
+  new THREE.Vector3(4, 0.15, 6),
+  new THREE.Vector3(18, 0.15, 14),
+  new THREE.Vector3(40, 0.15, 28),
+]);
+const nileGeo = new THREE.TubeGeometry(nileCurve, 100, 2.4, 12, false);
+const nileMat = new THREE.MeshStandardMaterial({
+  color: 0x1b5f73,
+  emissive: 0x0a3040,
+  emissiveIntensity: 0.4,
+  roughness: 0.25,
+  metalness: 0.35,
+  transparent: true,
+  opacity: 0.92,
+});
+const nile = new THREE.Mesh(nileGeo, nileMat);
+desert.add(nile);
+
+// Floating ankhs / gold shards
+const relics = new THREE.Group();
+scene.add(relics);
+const relicGeo = new THREE.OctahedronGeometry(0.35, 0);
+const relicMat = new THREE.MeshStandardMaterial({
+  color: 0xe0b84c,
+  emissive: 0x6a4a10,
+  emissiveIntensity: 0.6,
+  metalness: 0.85,
+  roughness: 0.25,
+});
+const relicData = [];
+for (let i = 0; i < (reduce ? 8 : 18); i++) {
+  const m = new THREE.Mesh(relicGeo, relicMat);
+  const base = {
+    x: (Math.random() - 0.5) * 36,
+    y: 2 + Math.random() * 10,
+    z: (Math.random() - 0.5) * 30,
+    s: 0.6 + Math.random() * 1.4,
+    sp: 0.4 + Math.random() * 1.2,
+    ph: Math.random() * Math.PI * 2,
+  };
+  m.position.set(base.x, base.y, base.z);
+  m.scale.setScalar(base.s);
+  relics.add(m);
+  relicData.push({ mesh: m, ...base });
+}
+
+// Hieroglyph billboards (simple gold planes with symbols via canvas)
+function makeGlyphTexture(char) {
+  const c = document.createElement("canvas");
+  c.width = 128;
+  c.height = 128;
+  const ctx = c.getContext("2d");
+  ctx.clearRect(0, 0, 128, 128);
+  ctx.fillStyle = "rgba(224,184,76,0.9)";
+  ctx.font = "72px serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(char, 64, 68);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+const glyphs = ["𓂀", "𓆣", "𓇳", "𓋹", "𓃭", "𓁰"];
+const glyphGroup = new THREE.Group();
+scene.add(glyphGroup);
+glyphs.forEach((g, i) => {
+  const mat = new THREE.MeshBasicMaterial({
+    map: makeGlyphTexture(g),
+    transparent: true,
+    opacity: 0.55,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+  });
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 2.2), mat);
+  const a = (i / glyphs.length) * Math.PI * 2;
+  m.position.set(Math.cos(a) * 16, 6 + (i % 3), Math.sin(a) * 16 - 6);
+  glyphGroup.add(m);
+});
+
+// Spark moons burst
+const sparks = [];
+const sparkGeo = new THREE.SphereGeometry(0.12, 8, 8);
+const sparkMat = new THREE.MeshBasicMaterial({ color: 0xffe7a8 });
+
+function spawnSparks() {
+  for (let i = 0; i < 28; i++) {
+    const m = new THREE.Mesh(sparkGeo, sparkMat);
+    m.position.copy(camera.position).add(new THREE.Vector3(0, -1, -6));
+    const v = new THREE.Vector3(
+      (Math.random() - 0.5) * 0.45,
+      Math.random() * 0.35 + 0.1,
+      (Math.random() - 0.5) * 0.45
+    );
+    scene.add(m);
+    sparks.push({ mesh: m, v, life: 1 });
+  }
+}
+document.getElementById("sparkBtn").addEventListener("click", spawnSparks);
+
+let targetProgress = 0;
+let smooth = 0;
+const panels = [...document.querySelectorAll("[data-panel]")];
+const bar = document.getElementById("bar");
+const hint = document.getElementById("hint");
+
+function onScroll() {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  targetProgress = max > 0 ? scrollY / max : 0;
+  if (bar) bar.style.width = (targetProgress * 100).toFixed(2) + "%";
+  if (hint && targetProgress > 0.04) hint.classList.add("is-hide");
+
+  const stage = targetProgress * (panels.length - 0.001);
+  panels.forEach((p, i) => {
+    const d = Math.abs(stage - i);
+    p.classList.toggle("is-on", d < 0.55);
+    p.classList.toggle("is-out", stage - i > 0.55);
+  });
+}
+addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+function resize() {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, reduce ? 1 : 1.75));
+}
+addEventListener("resize", resize, { passive: true });
+
+const clock = new THREE.Clock();
+function frame() {
+  const dt = Math.min(clock.getDelta(), 0.05);
+  const t = clock.elapsedTime;
+  smooth += (targetProgress - smooth) * (reduce ? 1 : 0.06);
+
+  // Camera path: approach pyramids, orbit, rise over Nile
+  const ang = -0.15 + smooth * Math.PI * 1.15;
+  const radius = 28 - smooth * 14;
+  const height = 8 + Math.sin(smooth * Math.PI) * 6 + smooth * 4;
+  camera.position.set(
+    Math.sin(ang) * radius,
+    height,
+    Math.cos(ang) * radius + 4
+  );
+  camera.lookAt(0, 3 + smooth * 2, -8);
+
+  moon.rotation.y = t * 0.05;
+  p1.rotation.y = Math.sin(t * 0.15) * 0.03;
+  glyphGroup.rotation.y = t * 0.08;
+  glyphGroup.children.forEach((g, i) => {
+    g.position.y = 6 + (i % 3) + Math.sin(t * 0.9 + i) * 0.6;
+    g.quaternion.copy(camera.quaternion);
+  });
+
+  relicData.forEach((r) => {
+    r.mesh.position.y = r.y + Math.sin(t * r.sp + r.ph) * 0.8;
+    r.mesh.rotation.x = t * 0.6 + r.ph;
+    r.mesh.rotation.y = t * 0.4 + r.ph;
+  });
+
+  nileMat.emissiveIntensity = 0.35 + Math.sin(t * 1.5) * 0.15;
+  goldGlow.intensity = 1.1 + Math.sin(t) * 0.3;
+
+  for (let i = sparks.length - 1; i >= 0; i--) {
+    const s = sparks[i];
+    s.life -= dt * 0.9;
+    s.v.y -= dt * 0.4;
+    s.mesh.position.addScaledVector(s.v, 60 * dt);
+    s.mesh.scale.setScalar(Math.max(s.life, 0.01));
+    if (s.life <= 0) {
+      scene.remove(s.mesh);
+      sparks.splice(i, 1);
+    }
+  }
+
+  renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+frame();
   </script>
 </body>
 </html>

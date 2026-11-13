@@ -2,12 +2,10 @@
 
 # Happy Birthday
 
-3D Egyptian scroll experience (Three.js): pyramids, Nile, moon, gold relics. Name from query param.
+One simple message over an Egyptian slot-style 3D night scene.
 
-## Live
+## Link
 
 https://metourni.github.io/bdtest/?name=Sofia
 
-Optional: `&age=25` · `&message=Your%20note`
-
-Scroll to move the camera through the desert court.
+Optional: `&title=Cleopatra%2C%20Queen%20of%20the%20East`

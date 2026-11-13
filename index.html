@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#05070d" />
+  <meta name="theme-color" content="#12081f" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="robots" content="noindex" />
-  <meta name="description" content="A 3D Egyptian birthday scroll under the Nile moon." />
+  <meta name="description" content="Happy Birthday Cleopatra, Queen of the East." />
   <title>Happy Birthday</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,22 +14,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet" />
   <style>
 :root {
-  --ink: #f6efdf;
-  --muted: rgba(246, 239, 223, 0.62);
-  --gold: #e0b84c;
-  --gold-dim: #a8872e;
+  --ink: #fff6e4;
+  --gold: #f0c14b;
+  --gold-deep: #c99220;
+  --teal: #3ec7c2;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --pad: clamp(1.1rem, 4.5vw, 2rem);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html, body { height: 100%; }
 body {
   margin: 0;
-  background: #05070d;
+  background: #12081f;
   color: var(--ink);
   font-family: "Cormorant Garamond", Georgia, serif;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 #world {
@@ -37,539 +36,494 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
   display: block;
-  touch-action: none;
-  pointer-events: none;
+  z-index: 0;
 }
 
-.vignette {
+.veil {
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 80% 70% at 50% 40%, transparent 40%, rgba(5, 7, 13, 0.55) 100%),
-    linear-gradient(180deg, rgba(5, 7, 13, 0.35), transparent 18%, transparent 72%, rgba(5, 7, 13, 0.85));
+    radial-gradient(ellipse 70% 55% at 50% 42%, transparent 0%, rgba(12, 6, 24, 0.25) 55%, rgba(12, 6, 24, 0.72) 100%),
+    linear-gradient(180deg, rgba(18, 8, 31, 0.45), transparent 22%, transparent 70%, rgba(18, 8, 31, 0.55));
 }
 
-.scroll-track {
-  position: relative;
+.stage {
+  position: fixed;
+  inset: 0;
   z-index: 2;
-  height: 520vh;
-}
-
-.hud {
-  position: sticky;
-  top: 0;
-  height: 100dvh;
-  height: 100svh;
   display: grid;
   place-items: center;
-  padding: calc(env(safe-area-inset-top) + 1.2rem) var(--pad) 1.5rem;
+  padding: calc(env(safe-area-inset-top) + 1.5rem) 1.25rem calc(env(safe-area-inset-bottom) + 1.5rem);
+  text-align: center;
   pointer-events: none;
 }
 
-.panel {
-  width: min(100%, 34rem);
-  text-align: center;
-  transform-style: preserve-3d;
-  perspective: 1200px;
+.card {
+  width: min(100%, 28rem);
+  transform: translateY(18px) scale(0.98);
   opacity: 0;
-  transform: translate3d(0, 40px, -120px) rotateX(12deg);
-  transition: opacity 0.7s var(--ease), transform 0.9s var(--ease);
-  pointer-events: auto;
+  animation: riseIn 1.2s var(--ease) 0.25s forwards;
 }
 
-.panel.is-on {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) rotateX(0deg);
-}
-
-.panel.is-out {
-  opacity: 0;
-  transform: translate3d(0, -28px, 80px) rotateX(-8deg);
+.ornament {
+  width: min(100%, 14rem);
+  height: 14px;
+  margin: 0 auto 1.1rem;
+  background:
+    linear-gradient(90deg, transparent, var(--gold), transparent);
+  clip-path: polygon(0 50%, 8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%);
+  opacity: 0.9;
 }
 
 .kicker {
-  margin: 0 0 0.7rem;
+  margin: 0 0 0.55rem;
   font-family: "Cinzel", serif;
-  font-size: 0.68rem;
-  letter-spacing: 0.34em;
+  font-size: 0.7rem;
+  letter-spacing: 0.36em;
   text-transform: uppercase;
-  color: var(--gold);
-}
-
-h1, h2 {
-  margin: 0;
-  font-family: "Cinzel", serif;
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: 0.02em;
-  text-wrap: balance;
+  color: var(--teal);
+  text-shadow: 0 0 18px rgba(62, 199, 194, 0.35);
 }
 
 h1 {
-  font-size: clamp(2.6rem, 11vw, 4.4rem);
-  background: linear-gradient(180deg, #fff6df, #e0b84c 55%, #8f6a1d);
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 10vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-wrap: balance;
+  background: linear-gradient(180deg, #fff8e6 0%, #f0c14b 48%, #a87418 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.45));
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.45));
 }
 
-h2 {
-  font-size: clamp(1.7rem, 6.5vw, 2.5rem);
-  color: var(--ink);
-}
-
-.lead {
-  margin: 0.9rem auto 0;
-  max-width: 28ch;
-  font-size: clamp(1.2rem, 4.2vw, 1.55rem);
-  font-style: italic;
-  color: var(--muted);
-  line-height: 1.45;
-}
-
-.note {
-  margin: 1rem auto 0;
-  max-width: 32ch;
-  font-size: clamp(1.25rem, 4.4vw, 1.6rem);
-  line-height: 1.5;
-  color: var(--ink);
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1.25rem;
-  min-height: 3rem;
-  padding: 0.8rem 1.35rem;
-  border: 1px solid var(--gold);
-  background: linear-gradient(180deg, #efd07a, #c9962a);
-  color: #1a1204;
+.name {
+  margin: 0.85rem 0 0;
   font-family: "Cinzel", serif;
-  font-size: 0.72rem;
+  font-size: clamp(1.35rem, 5.5vw, 1.9rem);
   font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-shadow: 0 0 24px rgba(240, 193, 75, 0.25);
+}
+
+.line {
+  margin: 0.7rem auto 0;
+  max-width: 22ch;
+  font-size: clamp(1.25rem, 4.6vw, 1.65rem);
+  font-style: italic;
+  color: rgba(255, 246, 228, 0.78);
+  line-height: 1.35;
+}
+
+.spark {
   pointer-events: auto;
+  margin-top: 1.4rem;
+  min-height: 2.75rem;
+  padding: 0.7rem 1.2rem;
+  border: 1px solid rgba(240, 193, 75, 0.55);
+  background: linear-gradient(180deg, rgba(240, 193, 75, 0.95), rgba(170, 110, 20, 0.95));
+  color: #1a1004;
+  font-family: "Cinzel", serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
   transition: transform 0.35s var(--ease), filter 0.3s ease;
   -webkit-tap-highlight-color: transparent;
 }
-.btn:active { transform: scale(0.97); }
-.btn--ghost {
-  background: transparent;
-  color: var(--gold);
-}
+.spark:active { transform: scale(0.97); }
 
-.wish {
-  display: grid;
-  gap: 0.75rem;
-  margin-top: 1.2rem;
-  text-align: left;
-}
-.wish span {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.75rem;
-  align-items: start;
-  padding: 0.85rem 1rem;
-  background: rgba(10, 14, 24, 0.45);
-  border: 1px solid rgba(224, 184, 76, 0.28);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  font-size: 1.05rem;
-  transform: translateZ(0);
-}
-.wish i {
-  width: 0.85rem;
-  height: 0.85rem;
-  margin-top: 0.3rem;
-  border-radius: 50%;
-  background: var(--gold);
-  box-shadow: inset -0.3rem 0 0 0 #0a0e18;
-}
-
-.progress {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3px;
-  z-index: 5;
-  background: rgba(255, 255, 255, 0.08);
-}
-.progress > i {
-  display: block;
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #8f6a1d, #e0b84c, #fff1c2);
-}
-
-.hint {
-  position: fixed;
-  left: 50%;
-  bottom: calc(1.1rem + env(safe-area-inset-bottom));
-  transform: translateX(-50%);
-  z-index: 4;
-  font-family: "Cinzel", serif;
-  font-size: 0.62rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--muted);
-  opacity: 0.9;
-  animation: bob 2.4s var(--ease) infinite;
-  pointer-events: none;
-}
-.hint.is-hide { opacity: 0; transition: opacity 0.5s ease; }
-
-@keyframes bob {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-6px); }
+@keyframes riseIn {
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .panel { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .hint { animation: none; }
+  .card { animation: none; opacity: 1; transform: none; }
 }
   </style>
 </head>
 <body>
   <canvas id="world" aria-hidden="true"></canvas>
-  <div class="vignette" aria-hidden="true"></div>
+  <div class="veil" aria-hidden="true"></div>
 
-  <script>
-    window.BIRTHDAY = {
-      name: "Love",
-      age: null,
-      message:
-        "Under Khonsu moon the Nile answers your name. Soft power, golden will, Cleopatra of this night.",
-    };
-  </script>
-
-  <div class="scroll-track" id="track">
-    <div class="hud">
-      <section class="panel is-on" data-panel="0">
-        <p class="kicker" id="heroMark">For you</p>
-        <h1>Happy<br />Birthday</h1>
-        <p class="lead" id="heroSub"></p>
-        <a class="btn" href="#story">Enter the Nile court</a>
-      </section>
+  <main class="stage">
+    <div class="card">
+      <div class="ornament" aria-hidden="true"></div>
+      <p class="kicker">Nile night</p>
+      <h1>Happy Birthday</h1>
+      <p class="name" id="who">Love</p>
+      <p class="line" id="title">Cleopatra, Queen of the East</p>
+      <button type="button" class="spark" id="sparkBtn">Gold dust</button>
     </div>
-
-    <div class="hud" id="story">
-      <section class="panel" data-panel="1">
-        <p class="kicker">From the Nile court</p>
-        <h2 id="letterTitle">To you,</h2>
-        <p class="note" id="letterBody"></p>
-      </section>
-    </div>
-
-    <div class="hud">
-      <section class="panel" data-panel="2">
-        <p class="kicker">Three blessings</p>
-        <h2>May the moon grant</h2>
-        <div class="wish">
-          <span><i></i>Nile mornings that feel like destiny</span>
-          <span><i></i>Gold that fits your name, not a costume</span>
-          <span><i></i>A court of people who match your tide</span>
-        </div>
-      </section>
-    </div>
-
-    <div class="hud">
-      <section class="panel" data-panel="3">
-        <p class="kicker">Crescent of Isis</p>
-        <h2 id="finaleTitle">Queen of your own Nile</h2>
-        <p class="lead">Keep scrolling. The pyramids turn for you.</p>
-        <button type="button" class="btn btn--ghost" id="sparkBtn">Awaken the moons</button>
-      </section>
-    </div>
-  </div>
-
-  <div class="progress" aria-hidden="true"><i id="bar"></i></div>
-  <p class="hint" id="hint">Scroll to rise</p>
+  </main>
 
   <script type="importmap">
   {
     "imports": {
-      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
     }
   }
   </script>
   <script type="module">
 import * as THREE from "three";
 
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const params = new URLSearchParams(location.search);
-const defaults = window.BIRTHDAY || {};
-const name = (params.get("name") || defaults.name || "Love").trim() || "Love";
-const age = (params.get("age") || (defaults.age != null ? String(defaults.age) : "")).trim();
-const message =
-  (params.get("message") || "").trim() ||
-  defaults.message ||
-  "Under Khonsu moon the Nile answers your name.";
+const name = (params.get("name") || "Love").trim() || "Love";
+const title =
+  (params.get("title") || "").trim() ||
+  "Cleopatra, Queen of the East";
 
 document.title = "Happy Birthday, " + name;
-document.getElementById("heroMark").textContent = "For " + name;
-document.getElementById("heroSub").textContent = age
-  ? name + " · Cleopatra of " + age
-  : name + " · Cleopatra of tonight";
-document.getElementById("letterTitle").textContent = "To " + name + ",";
-document.getElementById("letterBody").textContent = message;
-document.getElementById("finaleTitle").textContent = name + ", queen of your own Nile";
+document.getElementById("who").textContent = name;
+document.getElementById("title").textContent = title;
 
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const canvas = document.getElementById("world");
 const renderer = new THREE.WebGLRenderer({
   canvas,
   antialias: !reduce,
-  alpha: false,
   powerPreference: "high-performance",
 });
-renderer.setPixelRatio(Math.min(devicePixelRatio, reduce ? 1 : 1.75));
+renderer.setPixelRatio(Math.min(devicePixelRatio, reduce ? 1 : 1.85));
 renderer.setSize(innerWidth, innerHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.15;
+renderer.toneMappingExposure = 1.2;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x05070d);
-scene.fog = new THREE.FogExp2(0x05070d, 0.018);
+scene.fog = new THREE.FogExp2(0x140a24, 0.016);
 
-const camera = new THREE.PerspectiveCamera(48, innerWidth / innerHeight, 0.1, 400);
-camera.position.set(0, 8, 28);
+// Slot-game sky: deep purple → teal horizon
+const sky = new THREE.Mesh(
+  new THREE.SphereGeometry(180, 32, 16),
+  new THREE.ShaderMaterial({
+    side: THREE.BackSide,
+    uniforms: {
+      top: { value: new THREE.Color(0x1a0a38) },
+      mid: { value: new THREE.Color(0x3a1560) },
+      bot: { value: new THREE.Color(0x1a4a55) },
+    },
+    vertexShader: `
+      varying vec3 vPos;
+      void main() {
+        vPos = position;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform vec3 top;
+      uniform vec3 mid;
+      uniform vec3 bot;
+      varying vec3 vPos;
+      void main() {
+        float h = normalize(vPos).y;
+        vec3 col = mix(bot, mid, smoothstep(-0.2, 0.25, h));
+        col = mix(col, top, smoothstep(0.2, 0.85, h));
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+  })
+);
+scene.add(sky);
 
-const hemi = new THREE.HemisphereLight(0x9eb7ff, 0x3a2710, 0.55);
-scene.add(hemi);
-const sun = new THREE.DirectionalLight(0xffd59a, 1.35);
-sun.position.set(-18, 26, 10);
-scene.add(sun);
-const goldGlow = new THREE.PointLight(0xe0b84c, 1.4, 60, 2);
-goldGlow.position.set(0, 10, 4);
-scene.add(goldGlow);
+const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.1, 400);
+camera.position.set(0, 7.5, 26);
+
+scene.add(new THREE.HemisphereLight(0x9aa7ff, 0x4a2a10, 0.55));
+const key = new THREE.DirectionalLight(0xffd89a, 1.35);
+key.position.set(-12, 22, 8);
+scene.add(key);
+const rim = new THREE.PointLight(0x3ec7c2, 1.6, 70);
+rim.position.set(10, 8, 6);
+scene.add(rim);
+const goldLight = new THREE.PointLight(0xf0c14b, 2.2, 55);
+goldLight.position.set(0, 9, 2);
+scene.add(goldLight);
 
 // Stars
 {
-  const count = reduce ? 400 : 1200;
-  const pos = new Float32Array(count * 3);
-  for (let i = 0; i < count; i++) {
-    const r = 80 + Math.random() * 120;
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos(2 * Math.random() - 1);
-    pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-    pos[i * 3 + 1] = Math.abs(r * Math.cos(phi)) + 10;
-    pos[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta);
+  const n = reduce ? 500 : 1600;
+  const pos = new Float32Array(n * 3);
+  for (let i = 0; i < n; i++) {
+    const r = 60 + Math.random() * 110;
+    const t = Math.random() * Math.PI * 2;
+    const p = Math.acos(2 * Math.random() - 1);
+    pos[i * 3] = r * Math.sin(p) * Math.cos(t);
+    pos[i * 3 + 1] = Math.abs(r * Math.cos(p)) + 8;
+    pos[i * 3 + 2] = r * Math.sin(p) * Math.sin(t);
   }
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-  const mat = new THREE.PointsMaterial({
-    color: 0xfff2c8,
-    size: 0.35,
-    sizeAttenuation: true,
-    transparent: true,
-    opacity: 0.85,
-  });
-  scene.add(new THREE.Points(geo, mat));
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  scene.add(
+    new THREE.Points(
+      g,
+      new THREE.PointsMaterial({
+        color: 0xfff1c4,
+        size: 0.28,
+        transparent: true,
+        opacity: 0.9,
+        depthWrite: false,
+      })
+    )
+  );
 }
 
-function pyramidMesh(size, color) {
-  const geo = new THREE.ConeGeometry(size, size * 1.15, 4, 1, false);
-  geo.rotateY(Math.PI / 4);
-  const mat = new THREE.MeshStandardMaterial({
-    color,
-    roughness: 0.82,
-    metalness: 0.08,
+function goldMat(hex = 0xe0b14a) {
+  return new THREE.MeshStandardMaterial({
+    color: hex,
+    metalness: 0.92,
+    roughness: 0.28,
+    emissive: 0x4a3208,
+    emissiveIntensity: 0.25,
+  });
+}
+
+function stoneMat(hex = 0xb8924a) {
+  return new THREE.MeshStandardMaterial({
+    color: hex,
+    roughness: 0.78,
+    metalness: 0.18,
     flatShading: true,
   });
-  const mesh = new THREE.Mesh(geo, mat);
-  mesh.castShadow = false;
-  return mesh;
 }
 
-const desert = new THREE.Group();
-scene.add(desert);
+function pyramid(size, color) {
+  const geo = new THREE.ConeGeometry(size, size * 1.2, 4);
+  geo.rotateY(Math.PI / 4);
+  return new THREE.Mesh(geo, stoneMat(color));
+}
+
+const world = new THREE.Group();
+scene.add(world);
 
 const sand = new THREE.Mesh(
-  new THREE.CircleGeometry(160, 64),
-  new THREE.MeshStandardMaterial({ color: 0x8a6a3a, roughness: 1, metalness: 0.05 })
+  new THREE.CircleGeometry(140, 72),
+  new THREE.MeshStandardMaterial({ color: 0x9a6f3a, roughness: 1, metalness: 0.05 })
 );
 sand.rotation.x = -Math.PI / 2;
-sand.position.y = 0;
-desert.add(sand);
+world.add(sand);
 
-const duneMat = new THREE.MeshStandardMaterial({
-  color: 0x9b7540,
-  roughness: 1,
-  flatShading: true,
-});
-for (let i = 0; i < 10; i++) {
-  const d = new THREE.Mesh(new THREE.SphereGeometry(8 + Math.random() * 10, 8, 6, 0, Math.PI * 2, 0, Math.PI / 2), duneMat);
-  d.position.set((Math.random() - 0.5) * 90, -1.5, -20 - Math.random() * 70);
-  d.scale.set(1.6, 0.35 + Math.random() * 0.25, 1.2);
-  desert.add(d);
+for (let i = 0; i < 8; i++) {
+  const dune = new THREE.Mesh(
+    new THREE.SphereGeometry(10 + Math.random() * 8, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2),
+    new THREE.MeshStandardMaterial({ color: 0xa87a42, roughness: 1, flatShading: true })
+  );
+  dune.position.set((Math.random() - 0.5) * 80, -2, -25 - Math.random() * 50);
+  dune.scale.set(1.8, 0.32, 1.3);
+  world.add(dune);
 }
 
-const p1 = pyramidMesh(10, 0xc9a35b);
-p1.position.set(0, 5.75, -8);
-const p2 = pyramidMesh(6.2, 0xb8924a);
-p2.position.set(-14, 3.55, -18);
-const p3 = pyramidMesh(4.8, 0xa87f3c);
-p3.position.set(13, 2.75, -22);
-desert.add(p1, p2, p3);
+const p1 = pyramid(11, 0xd4a84e);
+p1.position.set(0, 6.6, -10);
+const p2 = pyramid(7, 0xc49640);
+p2.position.set(-13, 4.2, -20);
+const p3 = pyramid(5.5, 0xb48438);
+p3.position.set(12, 3.3, -24);
+world.add(p1, p2, p3);
+
+// Gold pyramid caps (slot-game shine)
+;[p1, p2, p3].forEach((p, i) => {
+  const cap = new THREE.Mesh(
+    new THREE.ConeGeometry(0.9 - i * 0.15, 1.2 - i * 0.15, 4),
+    goldMat(0xf2c85a)
+  );
+  cap.rotation.y = Math.PI / 4;
+  cap.position.y = p.geometry.parameters.height / 2 - 0.2;
+  p.add(cap);
+});
+
+// Temple pillars
+function pillar(x, z) {
+  const g = new THREE.Group();
+  const shaft = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.55, 0.7, 8, 10),
+    goldMat(0xd7a63f)
+  );
+  shaft.position.y = 4;
+  const band = new THREE.Mesh(
+    new THREE.TorusGeometry(0.78, 0.12, 8, 24),
+    new THREE.MeshStandardMaterial({
+      color: 0x2ec4b6,
+      metalness: 0.7,
+      roughness: 0.35,
+      emissive: 0x0a4a45,
+      emissiveIntensity: 0.5,
+    })
+  );
+  band.rotation.x = Math.PI / 2;
+  band.position.y = 5.5;
+  const top = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.35, 2.1), goldMat(0xe8bc55));
+  top.position.y = 8.1;
+  g.add(shaft, band, top);
+  g.position.set(x, 0, z);
+  return g;
+}
+world.add(pillar(-8, 4), pillar(8, 4), pillar(-11, -2), pillar(11, -2));
 
 // Moon
 const moonTex = new THREE.TextureLoader().load("assets/moon.jpg");
 moonTex.colorSpace = THREE.SRGBColorSpace;
 const moon = new THREE.Mesh(
-  new THREE.SphereGeometry(3.2, 48, 48),
+  new THREE.SphereGeometry(3.4, 48, 48),
   new THREE.MeshStandardMaterial({
     map: moonTex,
     emissive: 0x665533,
-    emissiveIntensity: 0.35,
+    emissiveIntensity: 0.4,
     roughness: 1,
-    metalness: 0,
   })
 );
-moon.position.set(12, 22, -30);
+moon.position.set(-10, 20, -28);
 scene.add(moon);
-const moonLight = new THREE.PointLight(0xfff0c8, 1.8, 80);
-moon.add(moonLight);
+moon.add(new THREE.PointLight(0xfff0c8, 1.6, 70));
 
-// Nile ribbon
-const nileCurve = new THREE.CatmullRomCurve3([
-  new THREE.Vector3(-40, 0.15, 25),
-  new THREE.Vector3(-10, 0.15, 12),
-  new THREE.Vector3(4, 0.15, 6),
-  new THREE.Vector3(18, 0.15, 14),
-  new THREE.Vector3(40, 0.15, 28),
-]);
-const nileGeo = new THREE.TubeGeometry(nileCurve, 100, 2.4, 12, false);
-const nileMat = new THREE.MeshStandardMaterial({
-  color: 0x1b5f73,
-  emissive: 0x0a3040,
-  emissiveIntensity: 0.4,
-  roughness: 0.25,
-  metalness: 0.35,
-  transparent: true,
-  opacity: 0.92,
-});
-const nile = new THREE.Mesh(nileGeo, nileMat);
-desert.add(nile);
+// Eye of Horus / sun disk above center pyramid
+const disk = new THREE.Mesh(
+  new THREE.CircleGeometry(1.6, 48),
+  new THREE.MeshStandardMaterial({
+    color: 0xffd56a,
+    emissive: 0xf0a020,
+    emissiveIntensity: 1.2,
+    metalness: 0.6,
+    roughness: 0.3,
+    side: THREE.DoubleSide,
+  })
+);
+disk.position.set(0, 15.5, -10);
+scene.add(disk);
+const diskRing = new THREE.Mesh(
+  new THREE.TorusGeometry(2.05, 0.08, 8, 48),
+  goldMat(0xffe08a)
+);
+diskRing.position.copy(disk.position);
+scene.add(diskRing);
 
-// Floating ankhs / gold shards
-const relics = new THREE.Group();
-scene.add(relics);
-const relicGeo = new THREE.OctahedronGeometry(0.35, 0);
-const relicMat = new THREE.MeshStandardMaterial({
-  color: 0xe0b84c,
-  emissive: 0x6a4a10,
-  emissiveIntensity: 0.6,
-  metalness: 0.85,
-  roughness: 0.25,
-});
-const relicData = [];
-for (let i = 0; i < (reduce ? 8 : 18); i++) {
-  const m = new THREE.Mesh(relicGeo, relicMat);
-  const base = {
-    x: (Math.random() - 0.5) * 36,
-    y: 2 + Math.random() * 10,
-    z: (Math.random() - 0.5) * 30,
-    s: 0.6 + Math.random() * 1.4,
-    sp: 0.4 + Math.random() * 1.2,
+// Floating scarab / jewel particles
+const jewels = [];
+const jewelGeo = new THREE.OctahedronGeometry(0.28, 0);
+const jewelMat = goldMat(0xffd56a);
+for (let i = 0; i < (reduce ? 10 : 22); i++) {
+  const m = new THREE.Mesh(jewelGeo, jewelMat);
+  const d = {
+    mesh: m,
+    x: (Math.random() - 0.5) * 28,
+    y: 2 + Math.random() * 9,
+    z: (Math.random() - 0.5) * 22,
     ph: Math.random() * Math.PI * 2,
+    sp: 0.5 + Math.random(),
   };
-  m.position.set(base.x, base.y, base.z);
-  m.scale.setScalar(base.s);
-  relics.add(m);
-  relicData.push({ mesh: m, ...base });
+  m.position.set(d.x, d.y, d.z);
+  m.scale.setScalar(0.7 + Math.random());
+  scene.add(m);
+  jewels.push(d);
 }
 
-// Hieroglyph billboards (simple gold planes with symbols via canvas)
-function makeGlyphTexture(char) {
+// Hieroglyph cards
+function glyphTex(sym) {
   const c = document.createElement("canvas");
   c.width = 128;
   c.height = 128;
   const ctx = c.getContext("2d");
-  ctx.clearRect(0, 0, 128, 128);
-  ctx.fillStyle = "rgba(224,184,76,0.9)";
-  ctx.font = "72px serif";
+  ctx.fillStyle = "rgba(240,193,75,0.92)";
+  ctx.font = "70px serif";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText(char, 64, 68);
+  ctx.fillText(sym, 64, 70);
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
   return t;
 }
-const glyphs = ["𓂀", "𓆣", "𓇳", "𓋹", "𓃭", "𓁰"];
-const glyphGroup = new THREE.Group();
-scene.add(glyphGroup);
-glyphs.forEach((g, i) => {
-  const mat = new THREE.MeshBasicMaterial({
-    map: makeGlyphTexture(g),
-    transparent: true,
-    opacity: 0.55,
-    depthWrite: false,
-    side: THREE.DoubleSide,
-  });
-  const m = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 2.2), mat);
-  const a = (i / glyphs.length) * Math.PI * 2;
-  m.position.set(Math.cos(a) * 16, 6 + (i % 3), Math.sin(a) * 16 - 6);
-  glyphGroup.add(m);
+const glyphs = new THREE.Group();
+scene.add(glyphs);
+["𓂀", "𓆣", "𓇳", "𓋹", "𓃭", "𓁰"].forEach((s, i) => {
+  const m = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.8, 1.8),
+    new THREE.MeshBasicMaterial({
+      map: glyphTex(s),
+      transparent: true,
+      opacity: 0.65,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+    })
+  );
+  const a = (i / 6) * Math.PI * 2;
+  m.position.set(Math.cos(a) * 14, 5 + (i % 2), Math.sin(a) * 12 - 4);
+  glyphs.add(m);
 });
 
-// Spark moons burst
-const sparks = [];
-const sparkGeo = new THREE.SphereGeometry(0.12, 8, 8);
-const sparkMat = new THREE.MeshBasicMaterial({ color: 0xffe7a8 });
+// Nile ribbon with teal glow
+const nile = new THREE.Mesh(
+  new THREE.TubeGeometry(
+    new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-42, 0.12, 22),
+      new THREE.Vector3(-12, 0.12, 10),
+      new THREE.Vector3(2, 0.12, 5),
+      new THREE.Vector3(16, 0.12, 12),
+      new THREE.Vector3(42, 0.12, 24),
+    ]),
+    100,
+    2.2,
+    12,
+    false
+  ),
+  new THREE.MeshStandardMaterial({
+    color: 0x1f7f88,
+    emissive: 0x0c3d48,
+    emissiveIntensity: 0.55,
+    metalness: 0.4,
+    roughness: 0.22,
+    transparent: true,
+    opacity: 0.92,
+  })
+);
+world.add(nile);
 
-function spawnSparks() {
-  for (let i = 0; i < 28; i++) {
+// Burst sparks
+const sparks = [];
+const sparkGeo = new THREE.SphereGeometry(0.1, 8, 8);
+const sparkMat = new THREE.MeshBasicMaterial({ color: 0xffe7a8 });
+function burst() {
+  const origin = new THREE.Vector3(0, 6, 4);
+  for (let i = 0; i < 36; i++) {
     const m = new THREE.Mesh(sparkGeo, sparkMat);
-    m.position.copy(camera.position).add(new THREE.Vector3(0, -1, -6));
-    const v = new THREE.Vector3(
-      (Math.random() - 0.5) * 0.45,
-      Math.random() * 0.35 + 0.1,
-      (Math.random() - 0.5) * 0.45
-    );
+    m.position.copy(origin);
     scene.add(m);
-    sparks.push({ mesh: m, v, life: 1 });
+    sparks.push({
+      mesh: m,
+      v: new THREE.Vector3(
+        (Math.random() - 0.5) * 0.5,
+        Math.random() * 0.4 + 0.12,
+        (Math.random() - 0.5) * 0.5
+      ),
+      life: 1,
+    });
   }
 }
-document.getElementById("sparkBtn").addEventListener("click", spawnSparks);
+document.getElementById("sparkBtn").addEventListener("click", burst);
 
-let targetProgress = 0;
-let smooth = 0;
-const panels = [...document.querySelectorAll("[data-panel]")];
-const bar = document.getElementById("bar");
-const hint = document.getElementById("hint");
-
-function onScroll() {
-  const max = document.documentElement.scrollHeight - innerHeight;
-  targetProgress = max > 0 ? scrollY / max : 0;
-  if (bar) bar.style.width = (targetProgress * 100).toFixed(2) + "%";
-  if (hint && targetProgress > 0.04) hint.classList.add("is-hide");
-
-  const stage = targetProgress * (panels.length - 0.001);
-  panels.forEach((p, i) => {
-    const d = Math.abs(stage - i);
-    p.classList.toggle("is-on", d < 0.55);
-    p.classList.toggle("is-out", stage - i > 0.55);
-  });
+// Pointer / touch parallax
+const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
+function onPointer(e) {
+  const x = e.touches ? e.touches[0].clientX : e.clientX;
+  const y = e.touches ? e.touches[0].clientY : e.clientY;
+  pointer.tx = (x / innerWidth) * 2 - 1;
+  pointer.ty = (y / innerHeight) * 2 - 1;
 }
-addEventListener("scroll", onScroll, { passive: true });
-onScroll();
+addEventListener("pointermove", onPointer, { passive: true });
+addEventListener("touchmove", onPointer, { passive: true });
 
 function resize() {
   camera.aspect = innerWidth / innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(innerWidth, innerHeight);
-  renderer.setPixelRatio(Math.min(devicePixelRatio, reduce ? 1 : 1.75));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, reduce ? 1 : 1.85));
 }
 addEventListener("resize", resize, { passive: true });
 
@@ -577,41 +531,43 @@ const clock = new THREE.Clock();
 function frame() {
   const dt = Math.min(clock.getDelta(), 0.05);
   const t = clock.elapsedTime;
-  smooth += (targetProgress - smooth) * (reduce ? 1 : 0.06);
 
-  // Camera path: approach pyramids, orbit, rise over Nile
-  const ang = -0.15 + smooth * Math.PI * 1.15;
-  const radius = 28 - smooth * 14;
-  const height = 8 + Math.sin(smooth * Math.PI) * 6 + smooth * 4;
-  camera.position.set(
-    Math.sin(ang) * radius,
-    height,
-    Math.cos(ang) * radius + 4
-  );
-  camera.lookAt(0, 3 + smooth * 2, -8);
+  pointer.x += (pointer.tx - pointer.x) * 0.04;
+  pointer.y += (pointer.ty - pointer.y) * 0.04;
 
-  moon.rotation.y = t * 0.05;
-  p1.rotation.y = Math.sin(t * 0.15) * 0.03;
-  glyphGroup.rotation.y = t * 0.08;
-  glyphGroup.children.forEach((g, i) => {
-    g.position.y = 6 + (i % 3) + Math.sin(t * 0.9 + i) * 0.6;
+  const orbit = t * (reduce ? 0.02 : 0.045);
+  const radius = 24;
+  camera.position.x = Math.sin(orbit) * radius * 0.35 + pointer.x * 2.2;
+  camera.position.y = 7.2 + Math.sin(t * 0.35) * 0.45 - pointer.y * 1.2;
+  camera.position.z = 22 + Math.cos(orbit) * 4;
+  camera.lookAt(0, 5.5, -8);
+
+  moon.rotation.y = t * 0.04;
+  disk.rotation.z = t * 0.15;
+  diskRing.rotation.z = -t * 0.2;
+  disk.material.emissiveIntensity = 1.05 + Math.sin(t * 2) * 0.25;
+  goldLight.intensity = 1.8 + Math.sin(t * 1.4) * 0.4;
+  rim.intensity = 1.3 + Math.sin(t * 1.1 + 1) * 0.35;
+
+  glyphs.rotation.y = t * 0.07;
+  glyphs.children.forEach((g, i) => {
+    g.position.y = 5 + (i % 2) + Math.sin(t * 0.9 + i) * 0.55;
     g.quaternion.copy(camera.quaternion);
   });
 
-  relicData.forEach((r) => {
-    r.mesh.position.y = r.y + Math.sin(t * r.sp + r.ph) * 0.8;
-    r.mesh.rotation.x = t * 0.6 + r.ph;
-    r.mesh.rotation.y = t * 0.4 + r.ph;
+  jewels.forEach((j) => {
+    j.mesh.position.y = j.y + Math.sin(t * j.sp + j.ph) * 0.75;
+    j.mesh.rotation.x = t * 0.7 + j.ph;
+    j.mesh.rotation.y = t * 0.5 + j.ph;
   });
 
-  nileMat.emissiveIntensity = 0.35 + Math.sin(t * 1.5) * 0.15;
-  goldGlow.intensity = 1.1 + Math.sin(t) * 0.3;
+  p1.rotation.y = Math.sin(t * 0.12) * 0.04;
 
   for (let i = sparks.length - 1; i >= 0; i--) {
     const s = sparks[i];
-    s.life -= dt * 0.9;
-    s.v.y -= dt * 0.4;
-    s.mesh.position.addScaledVector(s.v, 60 * dt);
+    s.life -= dt * 0.85;
+    s.v.y -= dt * 0.35;
+    s.mesh.position.addScaledVector(s.v, 55 * dt);
     s.mesh.scale.setScalar(Math.max(s.life, 0.01));
     if (s.life <= 0) {
       scene.remove(s.mesh);

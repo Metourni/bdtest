@@ -1,10 +1,10 @@
 <img src="assets/icon.svg" width="64" height="64" alt="">
 
-# Happy Birthday — Cleopatra / Nile
+# Happy Birthday
 
-Mobile-first birthday page: Egyptian myth mood, moons, Nile water, and her as Cleopatra of the day.
+Mobile birthday scroll: Cleopatra / Nile / moon. Built with [landing-page-design](https://github.com/elayadesign/ai-design-skills).
 
-## Share a link
+## Share
 
 ```
 https://metourni.github.io/bdtest/?name=Sofia
@@ -12,6 +12,6 @@ https://metourni.github.io/bdtest/?name=Sofia
 
 Optional: `&age=25` · `&message=Your%20note`
 
-## Assets
+## Design notes
 
-Photos from Unsplash (moon, Giza, water, portraits), used under the Unsplash License.
+Layout **C** (minimal conversion): one audience, one action (open the scroll). Manrope, flat dark surfaces, type scale, tagline word reveal.

@@ -3,26 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#071018" />
+  <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="robots" content="noindex" />
+  <meta name="description" content="A private birthday scroll for her, Nile moon, Cleopatra energy." />
+  <meta property="og:title" content="Happy Birthday" />
+  <meta property="og:description" content="A private birthday scroll for her, Nile moon, Cleopatra energy." />
   <title>Happy Birthday</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
 :root {
-  --bg: #071018;
-  --lapis: #0e2a3d;
-  --nile: #1a5f6a;
+  --bg: #000000;
+  --surface: #181818;
+  --surface-2: #1f1f1f;
+  --surface-3: #272727;
+  --ink: #ffffff;
+  --ink-muted: #9b9b9b;
   --gold: #d4af37;
   --gold-soft: #e8d5a3;
-  --ink: #f4efe4;
-  --ink-muted: rgba(244, 239, 228, 0.68);
-  --line: rgba(212, 175, 55, 0.28);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --pad: clamp(1.15rem, 5vw, 2rem);
-  --font-display: "Cinzel", "Times New Roman", serif;
-  --font-body: "Cormorant Garamond", Georgia, serif;
+  --font: "Manrope", sans-serif;
+  --space-50: 4px;
+  --space-75: 8px;
+  --space-100: 12px;
+  --space-200: 16px;
+  --space-300: 24px;
+  --space-400: 32px;
+  --space-500: 40px;
+  --space-600: 48px;
+  --space-700: 64px;
+  --space-800: 80px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --pad: 16px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -35,19 +52,145 @@ html {
 body {
   margin: 0;
   min-height: var(--app-h, 720px);
-  background:
-    radial-gradient(90% 50% at 80% 0%, rgba(26, 95, 106, 0.35), transparent 55%),
-    radial-gradient(70% 40% at 10% 20%, rgba(212, 175, 55, 0.12), transparent 50%),
-    var(--bg);
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-body);
+  font-family: var(--font);
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 24px;
   overflow-x: hidden;
 }
 
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--gold);
+  color: #000;
+  padding: var(--space-75) var(--space-100);
+  z-index: 100;
+}
+.skip:focus { left: var(--space-200); top: var(--space-200); }
+
+/* Text styles */
+.heading-1 {
+  font-size: 60px;
+  line-height: 60px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0;
+}
+.heading-2 {
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0;
+}
+.heading-3 {
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin: 0;
+}
+.heading-5 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  text-wrap: balance;
+  margin: 0;
+}
+.title-4 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  margin: 0;
+}
+.title-5 {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--gold);
+}
+.body-2 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  text-wrap: pretty;
+  margin: 0;
+}
+.body-3 {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  text-wrap: pretty;
+  margin: 0;
+  color: var(--ink-muted);
+}
+.caption-4 {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  margin: 0;
+}
+.button-md {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.hero-heading {
+  max-width: 680px;
+  background: linear-gradient(90deg, #ffffff 0%, #9b9b9b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-sub {
+  max-width: 680px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-75);
+  padding: var(--space-75) var(--space-100);
+  min-height: 40px;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--gold);
+  color: #000000;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: transform 500ms var(--ease), background-color 300ms var(--ease), opacity 300ms var(--ease);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.btn:hover { background: var(--gold-soft); }
+.btn:active { transform: scale(0.98); }
+.btn:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--gold-soft);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  width: min(100%, 280px);
+}
+.btn--ghost:hover { background: var(--surface-2); }
 
 .moon-field {
   position: fixed;
@@ -56,358 +199,230 @@ a { color: inherit; text-decoration: none; }
   z-index: 0;
   overflow: hidden;
 }
-
 .moon-field .drift {
   position: absolute;
   width: var(--s, 10px);
   height: var(--s, 10px);
-  border-radius: 50%;
+  border-radius: 999px;
   background: var(--gold-soft);
-  opacity: 0.35;
+  opacity: 0.28;
   box-shadow: 4px 0 0 -1px var(--bg);
   animation: drift var(--dur, 14s) linear infinite;
   animation-delay: var(--delay, 0s);
 }
-
 @keyframes drift {
   from { transform: translate3d(0, calc(var(--app-h, 720px) + 40px), 0) rotate(0deg); }
   to { transform: translate3d(var(--x, 20px), -80px, 0) rotate(360deg); }
 }
 
-.hero, .letter, .realm, .wishes, .finale, .site-foot {
-  position: relative;
-  z-index: 1;
+.page > * { position: relative; z-index: 1; }
+
+.shell {
+  width: min(100%, 720px);
+  margin: 0 auto;
+  padding-inline: var(--pad);
 }
 
-/* Hero — Cleopatra portrait + moon + Nile wash */
 .hero {
   min-height: var(--app-h, 720px);
-  display: grid;
-  align-content: start;
-  padding: calc(env(safe-area-inset-top) + 1.25rem) var(--pad) 0;
-  gap: 0.55rem;
+  display: flex;
+  flex-direction: column;
+  padding-top: calc(env(safe-area-inset-top) + var(--space-400));
+  padding-bottom: var(--space-400);
+  gap: var(--space-300);
 }
 
-.hero-mark {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 0.68rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--gold);
-  animation: rise 0.9s var(--ease) both;
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+  animation: rise 500ms var(--ease) both;
 }
 
-.hero-title {
-  margin: 0.2rem 0 0;
-  font-family: var(--font-display);
-  font-size: clamp(2.6rem, 12vw, 4.2rem);
-  line-height: 0.95;
-  letter-spacing: 0.02em;
-  font-weight: 700;
-  text-transform: uppercase;
-  animation: rise 1s var(--ease) 0.08s both;
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-200);
+  padding-top: var(--space-100);
 }
 
-.hero-line { display: block; }
-
-.hero-line--accent {
-  color: var(--gold-soft);
-  font-family: var(--font-body);
-  font-style: italic;
-  font-weight: 500;
-  text-transform: none;
-  letter-spacing: -0.01em;
-  font-size: 1.15em;
-}
-
-.hero-sub {
-  margin: 0.65rem 0 0;
-  max-width: 24ch;
-  font-size: clamp(1.2rem, 4.2vw, 1.5rem);
-  font-style: italic;
-  color: var(--ink-muted);
-  animation: rise 1s var(--ease) 0.16s both;
-}
-
-.hero-cta {
-  margin-top: 1.15rem;
-  animation: rise 1s var(--ease) 0.24s both;
-}
-
-.btn {
+.proof-line {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-height: 3rem;
-  padding: 0.85rem 1.35rem;
-  border: 1px solid var(--gold);
-  background: var(--gold);
-  color: #0a1018;
-  font-family: var(--font-display);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  border-radius: 0;
-  cursor: pointer;
-  transition: transform 0.35s var(--ease);
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+  gap: var(--space-75);
+  color: var(--ink-muted);
 }
-
-.btn:active { transform: scale(0.97); }
-
-.btn--ghost {
-  background: transparent;
-  color: var(--gold-soft);
-  width: min(100%, 16rem);
-}
+.proof-line svg { width: 16px; height: 16px; color: var(--gold); flex-shrink: 0; }
 
 .hero-stage {
   position: relative;
-  margin-top: 1.25rem;
+  margin-top: auto;
   margin-inline: calc(var(--pad) * -1);
-  min-height: 58%;
-  min-height: 380px;
+  min-height: 360px;
+  background: var(--surface);
   overflow: hidden;
-  animation: fadeIn 1.2s var(--ease) 0.2s both;
+  animation: fadeIn 500ms var(--ease) 0.08s both;
 }
 
-.hero-stage::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 42%;
-  background: linear-gradient(180deg, transparent, var(--bg));
-  z-index: 4;
-  pointer-events: none;
-}
-
-.hero-bg {
+.hero-water {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(7, 16, 24, 0.15), rgba(7, 16, 24, 0.55)),
-    url("assets/water-night.jpg") center 40% / cover no-repeat;
-  filter: saturate(0.85) brightness(0.7);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+  opacity: 0.45;
 }
 
 .hero-portrait-wrap {
   position: absolute;
-  inset: 8% 12% 18%;
-  z-index: 2;
+  inset: var(--space-400) var(--space-300) var(--space-500);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid rgba(212, 175, 55, 0.35);
 }
 
-.hero-portrait {
+.hero-portrait-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 18%;
-  border: 1px solid rgba(212, 175, 55, 0.45);
-  box-shadow: 0 0 0 8px rgba(7, 16, 24, 0.35);
-}
-
-.uraeus {
-  position: absolute;
-  top: -0.35rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  width: min(72%, 14rem);
-  height: 1.1rem;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  clip-path: polygon(0 60%, 45% 0, 55% 0, 100% 60%, 55% 100%, 45% 100%);
 }
 
 .hero-moon {
   position: absolute;
-  top: 6%;
-  right: 4%;
-  width: clamp(4.5rem, 22vw, 7rem);
-  z-index: 3;
-  border-radius: 50%;
-  filter: drop-shadow(0 0 24px rgba(232, 213, 163, 0.35));
-  animation: floatMoon 7s ease-in-out infinite;
+  top: var(--space-300);
+  right: var(--space-200);
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  object-fit: cover;
+  z-index: 2;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.35);
+  animation: floatMoon 7000ms var(--ease) infinite;
 }
 
 .hero-crescent {
   position: absolute;
-  left: 6%;
-  bottom: 22%;
-  width: 3.2rem;
-  height: 3.2rem;
-  border-radius: 50%;
+  left: var(--space-300);
+  bottom: var(--space-600);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
   background: var(--gold-soft);
-  z-index: 3;
-  opacity: 0.9;
-  animation: floatMoon 9s ease-in-out 1s infinite reverse;
+  z-index: 2;
+  animation: floatMoon 9000ms var(--ease) 1000ms infinite reverse;
 }
-
 .hero-crescent::after {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  background: #0a1822;
+  border-radius: 999px;
+  background: var(--surface);
   transform: translate(24%, -8%) scale(0.92);
 }
 
 .ankh {
   position: absolute;
-  left: 8%;
-  top: 12%;
-  z-index: 3;
-  width: 1.6rem;
-  opacity: 0.75;
+  left: var(--space-300);
+  top: var(--space-300);
+  z-index: 2;
+  width: 20px;
+  height: 32px;
   color: var(--gold);
+  opacity: 0.85;
 }
 
 @keyframes floatMoon {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
 }
-
 @keyframes rise {
-  from { opacity: 0; transform: translateY(18px); }
+  from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes wave {
-  0% { background-position: 0 0; }
-  100% { background-position: 120px 0; }
+.section {
+  padding: var(--space-700) 0;
 }
 
-.letter, .realm, .wishes, .finale {
-  padding: 3.75rem var(--pad);
+.section-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-300);
 }
 
-.section-kicker {
-  margin: 0 0 0.55rem;
-  font-family: var(--font-display);
-  font-size: 0.62rem;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-.section-title {
-  margin: 0 0 1.25rem;
-  font-family: var(--font-display);
-  font-size: clamp(1.7rem, 7vw, 2.4rem);
-  line-height: 1.1;
-  letter-spacing: 0.02em;
-  font-weight: 600;
-}
-
-.letter {
-  border-top: 1px solid var(--line);
-}
+.section--surface { background: var(--surface); }
 
 .letter-body {
-  margin: 0;
-  max-width: 30ch;
-  font-size: clamp(1.3rem, 4.8vw, 1.65rem);
-  line-height: 1.55;
+  max-width: 36ch;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  text-wrap: pretty;
 }
 
-.letter-sign {
-  margin: 1.75rem 0 0;
-  font-family: var(--font-display);
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
+.water-band {
+  position: relative;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.water-band img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  object-position: center 60%;
+  opacity: 0.85;
+}
+.water-band .caption-4 {
+  position: absolute;
+  left: var(--pad);
+  bottom: var(--space-200);
+  color: var(--gold-soft);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-muted);
 }
 
 .realm-grid {
   display: grid;
-  gap: 1rem;
+  gap: var(--space-200);
 }
-
 .realm-shot {
   position: relative;
-  min-height: 220px;
+  border-radius: var(--radius-2xl);
   overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  min-height: 220px;
 }
-
 .realm-shot img {
   width: 100%;
   height: 100%;
   min-height: 220px;
   object-fit: cover;
-  filter: saturate(1.05) contrast(1.02) brightness(1.05);
 }
-
 .realm-shot figcaption {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 1.1rem 1rem;
-  background: linear-gradient(180deg, transparent 10%, rgba(7, 16, 24, 0.72));
-  font-family: var(--font-display);
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
+  padding: var(--space-200);
+  background: rgba(0, 0, 0, 0.55);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gold-soft);
 }
-
 .realm-shot--tall { min-height: 280px; }
 .realm-shot--tall img { min-height: 280px; }
-
-.water-band {
-  position: relative;
-  margin: 0 calc(var(--pad) * -1);
-  min-height: 160px;
-  overflow: hidden;
-}
-
-.water-band img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  object-position: center 60%;
-  filter: hue-rotate(8deg) saturate(1.1) brightness(0.75);
-}
-
-.water-band::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent),
-    repeating-linear-gradient(
-      105deg,
-      transparent 0 10px,
-      rgba(244, 239, 228, 0.04) 10px 11px
-    );
-  mix-blend-mode: soft-light;
-  animation: wave 16s linear infinite;
-}
-
-.water-band::after {
-  content: "waters of the Nile";
-  position: absolute;
-  left: var(--pad);
-  bottom: 1rem;
-  z-index: 2;
-  font-family: var(--font-display);
-  font-size: 0.62rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--gold-soft);
-}
-
-.wishes {
-  background: linear-gradient(180deg, transparent, rgba(14, 42, 61, 0.55));
-}
 
 .wish-list {
   list-style: none;
@@ -415,107 +430,91 @@ a { color: inherit; text-decoration: none; }
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
+  gap: var(--space-200);
 }
-
 .wish-list li {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.9rem;
+  grid-template-columns: 24px 1fr;
+  gap: var(--space-200);
   align-items: start;
-  padding-bottom: 1.15rem;
-  border-bottom: 1px solid var(--line);
-  font-size: 1.15rem;
+  padding: var(--space-200);
+  background: var(--surface-2);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-radius: var(--radius-xl);
+}
+.wish-list li svg {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  color: var(--gold);
 }
 
-.wish-list li:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
+.tagline {
+  padding: var(--space-800) 0;
+  background: var(--bg);
 }
-
-.wish-moon {
-  display: block;
-  width: 1.05rem;
-  height: 1.05rem;
-  margin-top: 0.25rem;
-  border-radius: 50%;
-  background: var(--gold-soft);
-  box-shadow: inset -0.38rem 0 0 0 var(--bg);
+.tagline-line {
+  max-width: 680px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em;
+}
+.tagline-line .word {
+  color: rgba(255, 255, 255, 0.28);
+  transition: color 500ms var(--ease);
+}
+.tagline-line .word.is-on {
+  color: var(--ink);
 }
 
 .finale {
   text-align: center;
-  padding-bottom: 4.5rem;
+  padding: var(--space-700) 0 var(--space-800);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.85rem;
-  min-height: 480px;
-  justify-content: center;
+  gap: var(--space-300);
+  background: var(--surface);
 }
-
 .finale-frame {
-  width: min(100%, 15rem);
+  width: min(100%, 240px);
   aspect-ratio: 3 / 4;
+  border-radius: var(--radius-2xl);
   overflow: hidden;
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  margin-bottom: 0.5rem;
-  position: relative;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  background: var(--surface-2);
 }
-
 .finale-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 15%;
 }
-
-.finale-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  box-shadow: inset 0 0 40px rgba(7, 16, 24, 0.45);
-  pointer-events: none;
-}
-
-.finale-eyebrow {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 0.62rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-}
-
-.finale-title {
-  margin: 0 0 1rem;
-  max-width: 16ch;
-  font-size: clamp(2rem, 8vw, 2.8rem);
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.1;
+.finale-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-100);
+  max-width: 680px;
 }
 
 .site-foot {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  padding: 1.4rem var(--pad) calc(1.4rem + env(safe-area-inset-bottom));
-  font-family: var(--font-display);
-  font-size: 0.58rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  border-top: 1px solid var(--line);
+  gap: var(--space-200);
+  padding: var(--space-300) var(--pad) calc(var(--space-300) + env(safe-area-inset-bottom));
+  background: var(--bg);
+  border: 1px solid var(--surface-3);
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
 }
-
-.foot-moon {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background: var(--gold-soft);
-  box-shadow: inset -0.22rem 0 0 0 var(--bg);
+.site-foot a:hover { color: var(--gold-soft); }
+.site-foot a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 
 .spark-canvas {
@@ -529,40 +528,49 @@ a { color: inherit; text-decoration: none; }
 
 .reveal:not(.is-in) {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(32px);
 }
-
 .reveal {
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
 }
-
 .reveal.is-in {
   opacity: 1;
   transform: translateY(0);
 }
 
 @media (min-width: 720px) {
+  :root { --pad: 24px; }
   .hero {
-    grid-template-columns: 1fr 1.05fr;
-    column-gap: 1.5rem;
-    align-items: start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-400);
+    align-items: center;
   }
-
-  .hero-mark, .hero-title, .hero-sub, .hero-cta { grid-column: 1; }
-
   .hero-stage {
-    grid-column: 2;
-    grid-row: 1 / -1;
     margin: 0;
-    min-height: calc(var(--app-h, 720px) - 2.5rem);
-    align-self: stretch;
+    min-height: calc(var(--app-h, 720px) - 80px);
+    border-radius: var(--radius-2xl);
+    height: 100%;
   }
-
   .realm-grid {
     grid-template-columns: 1.1fr 0.9fr;
   }
+  .heading-1 { font-size: 60px; line-height: 60px; }
+}
 
-  .letter-body { max-width: 38ch; }
+@media (max-width: 430px) {
+  .heading-1 {
+    font-size: 48px;
+    line-height: 48px;
+  }
+  .heading-2 {
+    font-size: 36px;
+    line-height: 40px;
+  }
+  .heading-3 {
+    font-size: 30px;
+    line-height: 36px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -572,112 +580,139 @@ a { color: inherit; text-decoration: none; }
     transition-duration: 0.01ms !important;
   }
   .reveal { opacity: 1; transform: none; }
+  .tagline-line .word { color: var(--ink); }
 }
   </style>
 </head>
 <body>
+  <a class="skip" href="#letter">Skip to note</a>
+
   <script>
     window.BIRTHDAY = {
       name: "Love",
       age: null,
       message:
-        "Under Khonsu’s moon and along the Nile, the queenship is yours. Soft power, golden will, and a year that answers to your name.",
+        "Under Khonsu moon and along the Nile, the queenship is yours. Soft power, golden will, and a year that answers to your name.",
     };
   </script>
 
   <div class="moon-field" aria-hidden="true" id="moonField"></div>
 
-  <header class="hero">
-    <p class="hero-mark" id="heroMark">for you</p>
-    <h1 class="hero-title">
-      <span class="hero-line">Happy</span>
-      <span class="hero-line hero-line--accent">Birthday</span>
-    </h1>
-    <p class="hero-sub" id="heroSub"></p>
-    <div class="hero-cta">
-      <a class="btn" href="#letter">Open the scroll</a>
-    </div>
-
-    <div class="hero-stage" aria-hidden="true">
-      <div class="hero-bg"></div>
-      <svg class="ankh" viewBox="0 0 24 40" fill="currentColor" aria-hidden="true">
-        <path d="M12 0c-3.3 0-6 2.7-6 6 0 2.4 1.4 4.4 3.4 5.4H4v4h6v24h4V15.4h6v-4h-5.4C16.6 10.4 18 8.4 18 6c0-3.3-2.7-6-6-6zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
-      </svg>
-      <img class="hero-moon" src="assets/moon.jpg" alt="" width="120" height="180" />
-      <div class="hero-crescent"></div>
-      <div class="hero-portrait-wrap">
-        <div class="uraeus" aria-hidden="true"></div>
-        <img class="hero-portrait" src="assets/portrait.jpg" alt="" width="800" height="1200" />
+  <div class="page">
+    <header class="hero shell">
+      <div class="hero-copy">
+        <p class="title-5" id="heroMark">For you</p>
+        <h1 class="heading-1 hero-heading">
+          Happy<br />Birthday
+        </h1>
+        <p class="body-3 hero-sub" id="heroSub"></p>
+        <div class="hero-cta-row">
+          <a class="btn button-md" href="#letter">Open your scroll</a>
+          <p class="caption-4 proof-line">
+            <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M248,152a8,8,0,0,1-8,8H192v16h16a8,8,0,0,1,0,16H192v16h16a8,8,0,0,1,0,16H192a16,16,0,0,1-16-16V128a48.05,48.05,0,0,0-48-48H88v16h16a8,8,0,0,1,0,16H88v16h16a8,8,0,0,1,0,16H88v16h16a8,8,0,0,1,0,16H88a16,16,0,0,1-16-16V80A48.05,48.05,0,0,0,24,128v80a8,8,0,0,1-16,0V128A64.07,64.07,0,0,1,72,64h56a64.07,64.07,0,0,1,64,64v16h40A8,8,0,0,1,248,152Z"/></svg>
+            Nile court · moon of Khonsu
+          </p>
+        </div>
       </div>
-    </div>
-  </header>
 
-  <main>
-    <section class="letter reveal is-in" id="letter">
-      <p class="section-kicker">from the Nile court</p>
-      <h2 class="section-title" id="letterTitle">To you,</h2>
-      <p class="letter-body" id="letterBody"></p>
-      <p class="letter-sign">with love · always</p>
-    </section>
-
-    <div class="water-band" aria-hidden="true">
-      <img src="assets/water.jpg" alt="" width="1400" height="1050" />
-    </div>
-
-    <section class="realm reveal is-in" id="realm">
-      <p class="section-kicker">her realm</p>
-      <h2 class="section-title">Cleopatra of this day</h2>
-      <div class="realm-grid">
-        <figure class="realm-shot realm-shot--tall">
-          <img src="assets/nile.jpg" alt="Sphinx and pyramid at Giza" width="1400" height="2154" loading="lazy" />
-          <figcaption>stone that remembers queens</figcaption>
-        </figure>
-        <figure class="realm-shot">
-          <img src="assets/egypt-night.jpg" alt="Great Pyramid under open sky" width="1400" height="933" loading="lazy" />
-          <figcaption>pyramid light</figcaption>
-        </figure>
-        <figure class="realm-shot">
-          <img src="assets/water-night.jpg" alt="Water under open sky" width="1400" height="931" loading="lazy" />
-          <figcaption>by the water’s edge</figcaption>
-        </figure>
+      <div class="hero-stage" aria-hidden="true">
+        <img class="hero-water" src="assets/water-night.jpg" alt="" width="1400" height="931" />
+        <svg class="ankh" viewBox="0 0 24 40" fill="currentColor" aria-hidden="true">
+          <path d="M12 0c-3.3 0-6 2.7-6 6 0 2.4 1.4 4.4 3.4 5.4H4v4h6v24h4V15.4h6v-4h-5.4C16.6 10.4 18 8.4 18 6c0-3.3-2.7-6-6-6zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
+        </svg>
+        <img class="hero-moon" src="assets/moon.jpg" alt="" width="120" height="120" />
+        <div class="hero-crescent"></div>
+        <div class="hero-portrait-wrap">
+          <img src="assets/portrait.jpg" alt="Birthday portrait styled as Cleopatra of the night" width="800" height="1200" />
+        </div>
       </div>
-    </section>
+    </header>
 
-    <section class="wishes reveal is-in" id="wishes">
-      <p class="section-kicker">three blessings</p>
-      <h2 class="section-title">May the moon grant</h2>
-      <ul class="wish-list">
-        <li>
-          <span class="wish-moon" aria-hidden="true"></span>
-          <span>Nile mornings that feel like destiny</span>
-        </li>
-        <li>
-          <span class="wish-moon" aria-hidden="true"></span>
-          <span>Gold that fits your name, not a costume</span>
-        </li>
-        <li>
-          <span class="wish-moon" aria-hidden="true"></span>
-          <span>A court of people who match your tide</span>
-        </li>
-      </ul>
-    </section>
+    <main>
+      <section class="section" id="letter">
+        <div class="shell section-inner reveal is-in">
+          <p class="title-5">From the Nile court</p>
+          <h2 class="heading-5" id="letterTitle">To you,</h2>
+          <p class="letter-body" id="letterBody"></p>
+          <p class="caption-4">With love · always</p>
+        </div>
+      </section>
 
-    <section class="finale reveal is-in" id="finale">
-      <div class="finale-frame">
-        <img src="assets/portrait.jpg" alt="" width="800" height="1200" loading="lazy" />
+      <div class="water-band" aria-hidden="true">
+        <img src="assets/water.jpg" alt="" width="1400" height="1050" />
+        <p class="caption-4">Waters of the Nile</p>
       </div>
-      <p class="finale-eyebrow">crescent of Isis</p>
-      <h2 class="finale-title" id="finaleTitle">You look like the main character.</h2>
-      <button type="button" class="btn btn--ghost" id="sparkBtn">Tap for moons</button>
-    </section>
-  </main>
 
-  <footer class="site-foot">
-    <span class="foot-moon" aria-hidden="true"></span>
-    <span>made for your day</span>
-  </footer>
+      <section class="section section--surface" id="realm">
+        <div class="shell section-inner reveal is-in">
+          <p class="title-5">Her realm</p>
+          <h2 class="heading-5">Cleopatra of this day</h2>
+          <p class="body-3">Stone, sky, and water for the girl who gets the crown tonight.</p>
+          <div class="realm-grid">
+            <figure class="realm-shot realm-shot--tall">
+              <img src="assets/nile.jpg" alt="Sphinx and pyramid at Giza" width="1400" height="2154" loading="lazy" />
+              <figcaption>Stone that remembers queens</figcaption>
+            </figure>
+            <figure class="realm-shot">
+              <img src="assets/egypt-night.jpg" alt="Great Pyramid under open sky" width="1400" height="933" loading="lazy" />
+              <figcaption>Pyramid light</figcaption>
+            </figure>
+            <figure class="realm-shot">
+              <img src="assets/water-night.jpg" alt="Open water under sky" width="1400" height="931" loading="lazy" />
+              <figcaption>By the water edge</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="wishes">
+        <div class="shell section-inner reveal is-in">
+          <p class="title-5">Three blessings</p>
+          <h2 class="heading-5">May the moon grant</h2>
+          <ul class="wish-list">
+            <li>
+              <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88ZM184,32h-8V24a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V48h8a8,8,0,0,0,0-16ZM223.53,154.06a80,80,0,0,1-97.47,97.47A80,80,0,1,1,223.53,154.06ZM208,144a64.07,64.07,0,0,0-64-64,64.07,64.07,0,0,0-55.3,95.68A80.08,80.08,0,0,0,175.68,208.3,64.07,64.07,0,0,0,208,144Z"/></svg>
+              <span class="body-2">Nile mornings that feel like destiny</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88ZM184,32h-8V24a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V48h8a8,8,0,0,0,0-16ZM223.53,154.06a80,80,0,0,1-97.47,97.47A80,80,0,1,1,223.53,154.06ZM208,144a64.07,64.07,0,0,0-64-64,64.07,64.07,0,0,0-55.3,95.68A80.08,80.08,0,0,0,175.68,208.3,64.07,64.07,0,0,0,208,144Z"/></svg>
+              <span class="body-2">Gold that fits your name, not a costume</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88ZM184,32h-8V24a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V48h8a8,8,0,0,0,0-16ZM223.53,154.06a80,80,0,0,1-97.47,97.47A80,80,0,1,1,223.53,154.06ZM208,144a64.07,64.07,0,0,0-64-64,64.07,64.07,0,0,0-55.3,95.68A80.08,80.08,0,0,0,175.68,208.3,64.07,64.07,0,0,0,208,144Z"/></svg>
+              <span class="body-2">A court of people who match your tide</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="tagline" id="tagline" aria-label="Tagline">
+        <div class="shell">
+          <p class="heading-3 tagline-line" id="taglineLine"></p>
+        </div>
+      </section>
+
+      <section class="finale reveal is-in" id="finale">
+        <div class="finale-frame">
+          <img src="assets/portrait.jpg" alt="Portrait close up for the birthday finale" width="800" height="1200" loading="lazy" />
+        </div>
+        <div class="finale-copy">
+          <p class="title-5">Crescent of Isis</p>
+          <h2 class="heading-5" id="finaleTitle">Queen of your own Nile</h2>
+          <p class="body-3">Tap once. Let the moons rise for you.</p>
+        </div>
+        <button type="button" class="btn btn--ghost button-md" id="sparkBtn">Tap for moons</button>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <span class="caption-4">Made for your day</span>
+      <a class="caption-4" href="#letter">Back to note</a>
+    </footer>
+  </div>
 
   <canvas id="sparkCanvas" class="spark-canvas" aria-hidden="true"></canvas>
+
   <script>
 (function () {
   function setAppH() {
@@ -700,7 +735,7 @@ a { color: inherit; text-decoration: none; }
   const message =
     messageParam ||
     defaults.message ||
-    "Under Khonsu’s moon and along the Nile, the queenship is yours.";
+    "Under Khonsu moon and along the Nile, the queenship is yours.";
 
   document.title = "Happy Birthday, " + name;
 
@@ -710,47 +745,75 @@ a { color: inherit; text-decoration: none; }
   const letterBody = document.getElementById("letterBody");
   const finaleTitle = document.getElementById("finaleTitle");
 
-  if (mark) mark.textContent = "for " + name;
+  if (mark) mark.textContent = "For " + name;
   if (sub) {
     sub.textContent = age
-      ? name + " · Cleopatra of " + age
-      : name + " · Cleopatra of tonight";
+      ? name + ", Cleopatra of " + age + ". One scroll, one night, all yours."
+      : name + ", Cleopatra of tonight. One scroll, one night, all yours.";
   }
   if (letterTitle) letterTitle.textContent = "To " + name + ",";
   if (letterBody) letterBody.textContent = message;
-  if (finaleTitle) {
-    finaleTitle.textContent = name + ", queen of your own Nile.";
+  if (finaleTitle) finaleTitle.textContent = name + ", queen of your own Nile";
+
+  // Tagline reveal (B11)
+  const taglineText = "Queenship looks like you tonight under this moon";
+  const taglineEl = document.getElementById("taglineLine");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (taglineEl) {
+    const words = taglineText.split(" ");
+    taglineEl.innerHTML = words
+      .map(function (w) {
+        return '<span class="word">' + w + "</span>";
+      })
+      .join(" ");
+    const wordNodes = Array.prototype.slice.call(taglineEl.querySelectorAll(".word"));
+    if (reduce) {
+      wordNodes.forEach(function (n) { n.classList.add("is-on"); });
+    } else {
+      const io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            wordNodes.forEach(function (node, i) {
+              window.setTimeout(function () {
+                node.classList.add("is-on");
+              }, Math.min(i * 70, 400));
+            });
+            io.disconnect();
+          });
+        },
+        { threshold: 0.35 }
+      );
+      io.observe(taglineEl);
+    }
   }
 
   const field = document.getElementById("moonField");
-  if (field && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const count = Math.min(14, Math.max(8, Math.floor(window.innerWidth / 60)));
+  if (field && !reduce) {
+    const count = Math.min(12, Math.max(6, Math.floor(window.innerWidth / 70)));
     for (let i = 0; i < count; i++) {
       const el = document.createElement("span");
       el.className = "drift";
-      const size = 6 + Math.random() * 14;
+      const size = 6 + Math.random() * 12;
       el.style.setProperty("--s", size + "px");
       el.style.setProperty("--dur", 12 + Math.random() * 16 + "s");
       el.style.setProperty("--delay", -Math.random() * 18 + "s");
-      el.style.setProperty("--x", (Math.random() * 80 - 40) + "px");
+      el.style.setProperty("--x", Math.random() * 80 - 40 + "px");
       el.style.left = Math.random() * 100 + "%";
-      el.style.opacity = String(0.15 + Math.random() * 0.35);
+      el.style.opacity = String(0.12 + Math.random() * 0.28);
       field.appendChild(el);
     }
   }
 
-  const blocks = document.querySelectorAll(".letter, .realm, .wishes, .finale");
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const blocks = document.querySelectorAll(".reveal");
   if (!reduce && "IntersectionObserver" in window) {
-    blocks.forEach((el) => {
+    blocks.forEach(function (el) {
       const r = el.getBoundingClientRect();
-      if (r.top > (window.innerHeight || 800) * 0.92) {
-        el.classList.remove("is-in");
-      }
+      if (r.top > (window.innerHeight || 800) * 0.92) el.classList.remove("is-in");
     });
     const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      function (entries) {
+        entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-in");
             io.unobserve(entry.target);
@@ -759,7 +822,7 @@ a { color: inherit; text-decoration: none; }
       },
       { threshold: 0.12, rootMargin: "0px 0px 15% 0px" }
     );
-    blocks.forEach((el) => {
+    blocks.forEach(function (el) {
       if (!el.classList.contains("is-in")) io.observe(el);
     });
   }
@@ -767,7 +830,6 @@ a { color: inherit; text-decoration: none; }
   const canvas = document.getElementById("sparkCanvas");
   const btn = document.getElementById("sparkBtn");
   if (!canvas || !btn) return;
-
   const ctx = canvas.getContext("2d");
   let particles = [];
   let raf = 0;
@@ -781,12 +843,12 @@ a { color: inherit; text-decoration: none; }
   window.addEventListener("resize", resize, { passive: true });
 
   function spawn(x, y) {
-    const n = 28;
-    for (let i = 0; i < n; i++) {
-      const angle = (Math.PI * 2 * i) / n + Math.random() * 0.4;
+    for (let i = 0; i < 28; i++) {
+      const angle = (Math.PI * 2 * i) / 28 + Math.random() * 0.4;
       const speed = 2 + Math.random() * 5;
       particles.push({
-        x, y,
+        x: x,
+        y: y,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed - 1.5,
         life: 1,
@@ -816,8 +878,9 @@ a { color: inherit; text-decoration: none; }
 
   function tick() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles = particles.filter((p) => p.life > 0.02);
-    for (const p of particles) {
+    particles = particles.filter(function (p) { return p.life > 0.02; });
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
       p.x += p.vx;
       p.y += p.vy;
       p.vy += 0.06;
@@ -832,7 +895,7 @@ a { color: inherit; text-decoration: none; }
     }
   }
 
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", function () {
     const rect = btn.getBoundingClientRect();
     spawn(rect.left + rect.width / 2, rect.top + rect.height / 2);
   });

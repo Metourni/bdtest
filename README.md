@@ -2,10 +2,10 @@
 
 # Happy Birthday
 
-One simple message over an Egyptian slot-style 3D night scene.
+One simple message over an Egyptian night 3D scene.
 
-## Link
+## Live
 
-https://metourni.github.io/bdtest/?name=Sofia
+https://nile-queen-birthday.netlify.app/?name=Sofia
 
 Optional: `&title=Cleopatra%2C%20Queen%20of%20the%20East`
